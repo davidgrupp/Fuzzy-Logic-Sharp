@@ -42,15 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoGFuzzyEngineTests.cs" />
-    <Compile Include="FuzzyEngineTests.cs" />
-    <Compile Include="FuzzyRuleTests.cs" />
-    <Compile Include="GaussianMembershipFunctionTests.cs" />
-    <Compile Include="MoMFuzzyEngineTests.cs" />
+    <Compile Include="InferenceEngines\CoGFuzzyEngineTests.cs" />
+    <Compile Include="InferenceEngines\FuzzyEngineTests.cs" />
+    <Compile Include="Rules\FuzzyRuleTests.cs" />
+    <Compile Include="MembershipFunctions\GaussianMembershipFunctionTests.cs" />
+    <Compile Include="InferenceEngines\MoMFuzzyEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\FuzzyRuleEvaluatorTests.cs" />
     <Compile Include="TestUtilities.cs" />
-    <Compile Include="TrapezoidMembershipFunctionTests.cs" />
-    <Compile Include="UsageExampleTests.cs" />
+    <Compile Include="MembershipFunctions\TrapezoidMembershipFunctionTests.cs" />
+    <Compile Include="Examples\UsageExampleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

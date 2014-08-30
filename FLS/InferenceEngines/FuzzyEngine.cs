@@ -25,11 +25,54 @@ using FLS.MembershipFunctions;
 
 namespace FLS
 {
-	public class FuzzyEngine<T> : BaseFuzzyEngine where T : IDefuzzType<T>
+	public class FuzzyEngine<T> : IFuzzyEngine where T : IDefuzzType<T>
 	{
+		public FuzzyEngine()
+			: this(new FuzzyRuleEvaluator())
+		{
+
+		}
+
+		public FuzzyEngine(IFuzzyRuleEvaluator fuzzyRuleEvaluator)
+		{
+			_fuzzyRuleEvaluator = fuzzyRuleEvaluator;
+		}
+
+		#region Private Properties
+
+		protected FuzzyRuleCollection _rules;
+		protected IFuzzyRuleEvaluator _fuzzyRuleEvaluator;
+
+		#endregion
+
+		#region Private Methods
+
+		protected virtual void SetVariableInputValues(Object inputValues)
+		{
+			var conditionVariables = _rules.SelectMany(r => r.Premise.Select(p => p.Variable));
+
+			var inputVals = inputValues.PropertyValues();
+
+			foreach (var variable in conditionVariables)
+			{
+				if (false == inputVals.Any(kv => kv.Key.ToLower() == variable.Name.ToLower() && kv.Value is Int32))
+				{
+					throw new ArgumentException(String.Format(ErrorMessages.InputValusMustBeIntegers, variable.Name));
+				}
+				else
+				{
+					var inputValue = (Int32)inputVals.First(kv => kv.Key.ToLower() == variable.Name.ToLower()).Value;
+					variable.InputValue = inputValue;
+				}
+			}
+		}
+
+		#endregion
+
+
 		#region Public Methods
 
-		public override Double Defuzzify(Object inputValues)
+		public Double Defuzzify(Object inputValues)
 		{
 			if (_rules.Any(r => false == r.IsValid()))
 				throw new Exception(ErrorMessages.RulesAreInvalid);
@@ -45,7 +88,7 @@ namespace FLS
 
 			foreach (FuzzyRule fuzzyRule in _rules)
 			{
-				var premiseValue = Evaluate(fuzzyRule.Premise);
+				var premiseValue = _fuzzyRuleEvaluator.Evaluate(fuzzyRule.Premise);
 
 				var ruleConclusionVar = fuzzyRule.Conclusion.Variable;
 				T membershipFunction = (T)ruleConclusionVar.MembershipFunctions.First(mf => mf.Name == fuzzyRule.Conclusion.MembershipFunction.Name);
@@ -64,5 +107,20 @@ namespace FLS
 
 
 		#endregion
+
+		#region Public Properties
+
+		public FuzzyRuleCollection Rules
+		{
+			get
+			{
+				_rules = _rules ?? new FuzzyRuleCollection();
+				return _rules;
+			}
+			private set { _rules = value; }
+		}
+
+		#endregion
+
 	}
 }

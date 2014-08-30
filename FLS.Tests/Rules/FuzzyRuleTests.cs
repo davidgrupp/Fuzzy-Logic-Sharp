@@ -23,7 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FLS.Tests
+namespace FLS.Tests.Rules
 {
 	[TestFixture]
 	public class FuzzyRuleTests

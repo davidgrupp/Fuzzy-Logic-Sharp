@@ -27,23 +27,7 @@ namespace FLS.Rules
 	/// </summary>
 	public class FuzzyRule
 	{
-		#region Private Properties
-
-		private double _value = 0;
-
-		#endregion
-
-
 		#region Public Properties
-
-		/// <summary>
-		/// The value of the rule's premise after the evaluation process.
-		/// </summary>
-		public double Value
-		{
-			get { return _value; }
-			set { this._value = value; }
-		}
 
 		public Premise Premise { get; set; }
 
@@ -57,7 +41,7 @@ namespace FLS.Rules
 		/// Determines if the current list of tokens is a valid rule.
 		/// </summary>
 		/// <returns>true if valid, false if invalid</returns>
-		public Boolean IsValid()
+		public virtual Boolean IsValid()
 		{
 			var premiseIsNotNull = null != Premise;
 			var conclusionIsNotNull = null != Conclusion;

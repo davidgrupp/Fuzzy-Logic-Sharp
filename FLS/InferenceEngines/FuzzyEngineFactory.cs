@@ -14,6 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License. 
 #endregion
+using FLS.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,23 @@ namespace FLS
 {
 	public class FuzzyEngineFactory : IFuzzyEngineFactory
 	{
+		public FuzzyEngineFactory()
+			: this(new FuzzyRuleEvaluator())
+		{
+
+		}
+
+		public FuzzyEngineFactory(IFuzzyRuleEvaluator fuzzyRuleEvaluator)
+		{
+			_fuzzyRuleEvaluator = fuzzyRuleEvaluator;
+		}
+
+		#region Private Properties
+
+		protected IFuzzyRuleEvaluator _fuzzyRuleEvaluator;
+
+		#endregion
+
 		public IFuzzyEngine Default()
 		{
 			return Create<ICoGDefuzzification>();
@@ -30,7 +48,7 @@ namespace FLS
 
 		public IFuzzyEngine Create<T>() where T : IDefuzzType<T>
 		{
-			return new FuzzyEngine<T>();
+			return new FuzzyEngine<T>(_fuzzyRuleEvaluator);
 		}
 
 		public IFuzzyEngine Create(FuzzyEngineType type)

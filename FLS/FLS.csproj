@@ -47,14 +47,14 @@
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="InferenceEngines\BaseFuzzyEngine.cs" />
     <Compile Include="InferenceEngines\FuzzyEngine.cs" />
     <Compile Include="InferenceEngines\FuzzyEngineFactory.cs" />
-    <Compile Include="InferenceEngines\IFuzzyEngine.cs" />
-    <Compile Include="InferenceEngines\IFuzzyEngineFactory.cs" />
+    <Compile Include="Interfaces\IFuzzyEngine.cs" />
+    <Compile Include="Interfaces\IFuzzyEngineFactory.cs" />
+    <Compile Include="Interfaces\IFuzzyRuleEvaluator.cs" />
     <Compile Include="MembershipFunctions\CompositeMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\GaussianMembershipFunction.cs" />
-    <Compile Include="MembershipFunctions\IMembershipFunction.cs" />
+    <Compile Include="Interfaces\IMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\MembershipFunctionCollection.cs" />
     <Compile Include="MembershipFunctions\TrapezoidMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\TriangleMembershipFunction.cs" />
@@ -65,9 +65,10 @@
     <Compile Include="Rules\FuzzyRuleCollection.cs" />
     <Compile Include="Rules\FuzzyRuleCondition.cs" />
     <Compile Include="Rules\FuzzyRuleConditionConjunction.cs" />
+    <Compile Include="Rules\FuzzyRuleEvaluator.cs" />
     <Compile Include="Rules\FuzzyRuleToken.cs" />
     <Compile Include="Rules\FuzzyRuleTokenType.cs" />
-    <Compile Include="Rules\IFuzzyRuleToken.cs" />
+    <Compile Include="Interfaces\IFuzzyRuleToken.cs" />
     <Compile Include="Rules\Premise.cs" />
     <Compile Include="Variables\LinguisticVariable.cs" />
   </ItemGroup>
