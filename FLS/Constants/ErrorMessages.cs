@@ -25,7 +25,6 @@ namespace FLS.Constants
 	{
 		public const String RulesAreInvalid = "One or more rules is invalid.";
 		public const String InputValusMustBeIntegers = "Must provide a integer input value for all variables. Missing: {0}";
-		public const String MembershipFunctionsCoG = "All membership functions must be CoG Membership functions.";
-		public const String MembershipFunctionsMoM = "All membership functions must be MoM Membership functions.";
+		public const String MembershipFunctionsDefuzzType = "All membership functions must be {0} defuzz type.";
 	}
 }

@@ -18,15 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FLS
 {
-	public interface IFuzzyEngineFactory
+	public interface IMoMDefuzzification : IDefuzzType<IMoMDefuzzification>
 	{
-		IFuzzyEngine Default();
-
-		IFuzzyEngine Create<T>() where T : IDefuzzType<T>;
-
-		IFuzzyEngine Create(FuzzyEngineType type);
 	}
 }

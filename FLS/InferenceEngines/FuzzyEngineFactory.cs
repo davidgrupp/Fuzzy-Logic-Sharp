@@ -23,24 +23,24 @@ namespace FLS
 {
 	public class FuzzyEngineFactory : IFuzzyEngineFactory
 	{
-		public IFuzzyEngine GetDefault()
+		public IFuzzyEngine Default()
 		{
-			return new CoGFuzzyEngine();
+			return new FuzzyEngine<ICoGDefuzzification>();
 		}
 
-		public IFuzzyEngine GetEngine<T>() where T : IFuzzyEngine, new()
+		public IFuzzyEngine Create<T>() where T : IDefuzzType<T>
 		{
-			return new T();
+			return new FuzzyEngine<T>();
 		}
 
-		public IFuzzyEngine GetEngine(FuzzyEngineType type)
+		public IFuzzyEngine Create(FuzzyEngineType type)
 		{
 			switch (type)
 			{
 				case FuzzyEngineType.CoG:
-					return new CoGFuzzyEngine();
+					return new FuzzyEngine<ICoGDefuzzification>();
 				case FuzzyEngineType.MoM:
-					return new MoMFuzzyEngine();
+					return new FuzzyEngine<IMoMDefuzzification>();
 				default:
 					throw new ArgumentException("Cannot create engine with type.");
 			}

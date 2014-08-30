@@ -63,5 +63,6 @@ namespace FLS.MembershipFunctions
 		{
 			return _c;
 		}
+
 	}
 }

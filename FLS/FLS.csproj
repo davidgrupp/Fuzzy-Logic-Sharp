@@ -40,16 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\ErrorMessages.cs" />
+    <Compile Include="Defuzzification\ICoGDefuzzification.cs" />
+    <Compile Include="Defuzzification\IDefuzzType.cs" />
+    <Compile Include="Defuzzification\IMoMDefuzzification.cs" />
     <Compile Include="Extensions\FuzzyRuleExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="InferenceEngines\BaseFuzzyEngine.cs" />
-    <Compile Include="InferenceEngines\CoGFuzzyEngine.cs" />
+    <Compile Include="InferenceEngines\FuzzyEngine.cs" />
     <Compile Include="InferenceEngines\FuzzyEngineFactory.cs" />
     <Compile Include="InferenceEngines\IFuzzyEngine.cs" />
     <Compile Include="InferenceEngines\IFuzzyEngineFactory.cs" />
-    <Compile Include="InferenceEngines\MoMFuzzyEngine.cs" />
     <Compile Include="MembershipFunctions\CompositeMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\GaussianMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\ICoGMembershipFunction.cs" />

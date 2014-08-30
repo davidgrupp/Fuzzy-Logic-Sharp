@@ -18,15 +18,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FLS
 {
-	public interface IFuzzyEngineFactory
+	public interface IDefuzzType<T> where T : IDefuzzType<T>
 	{
-		IFuzzyEngine Default();
-
-		IFuzzyEngine Create<T>() where T : IDefuzzType<T>;
-
-		IFuzzyEngine Create(FuzzyEngineType type);
+		Double MidPoint();
 	}
 }

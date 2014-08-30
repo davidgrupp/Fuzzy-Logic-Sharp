@@ -32,39 +32,11 @@ namespace FLS.Tests
 		[SetUp]
 		public void Setup()
 		{
-			_testFilesPath = Path.Combine(TestUtilities.GetTestAssemblyDirectory(), @"..\..\TestFiles");
-		}
-
-		private String _testFilesPath;
-
-		[Test]
-		[ExpectedException(ExpectedException = typeof(Exception), ExpectedMessage = ErrorMessages.RulesAreInvalid)]
-		public void Defuzzify_InvalidRules_Success()
-		{
-			//Arrange
-			LinguisticVariable water = new LinguisticVariable("Water");
-			var cold = water.MembershipFunctions.AddTrapezoid("Cold", 0, 0, 20, 40);
-			var warm = water.MembershipFunctions.AddTriangle("Warm", 30, 50, 70);
-			var hot = water.MembershipFunctions.AddTrapezoid("Hot", 50, 80, 100, 100);
-
-			LinguisticVariable power = new LinguisticVariable("Power");
-			var low = power.MembershipFunctions.AddTriangle("Low", 0, 25, 50);
-			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
-
-
-			IFuzzyEngine fuzzyEngine = new CoGFuzzyEngine();
-
-			fuzzyEngine.Rules.If(water.Is(hot));
-
-			//Act
-			var result = fuzzyEngine.Defuzzify(new { water = 60 });
-
-			//Assert
 		}
 
 		[Test]
 		[TestCase(60, 40)]
-		public void Defuzzify_Success(Int32 waterInputValue, Double expectedValue)
+		public void CoG_Defuzzify_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange
 			LinguisticVariable water = new LinguisticVariable("Water");
@@ -77,7 +49,7 @@ namespace FLS.Tests
 			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
 
 
-			IFuzzyEngine fuzzyEngine = new CoGFuzzyEngine();
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
 
 			fuzzyEngine.Rules.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
 			fuzzyEngine.Rules.If(water.Is(hot)).Then(power.Is(low));
@@ -91,7 +63,7 @@ namespace FLS.Tests
 
 		[Test]
 		[TestCase(60, 66)]
-		public void Defuzzify2_Success(Int32 waterInputValue, Double expectedValue)
+		public void CoG_Defuzzify2_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange
 			LinguisticVariable water = new LinguisticVariable("Water");
@@ -105,7 +77,7 @@ namespace FLS.Tests
 			var high = power.MembershipFunctions.AddTriangle("High", 50, 100, 150);
 
 
-			IFuzzyEngine fuzzyEngine = new CoGFuzzyEngine();
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
 
 			fuzzyEngine.Rules.If(water.Is(cold)).Then(power.Is(high));
 			fuzzyEngine.Rules.If(water.Is(warm)).Then(power.Is(med));

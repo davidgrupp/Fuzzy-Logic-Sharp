@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 //   FLS - Fuzzy Logic Sharp for .NET
 //   Copyright 2014 David Grupp
 //
@@ -14,20 +14,21 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License. 
 #endregion
-using FLS.Constants;
-using FLS.MembershipFunctions;
-using FLS.Rules;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Linq;
+using FLS.Rules;
+using FLS.Constants;
+using FLS.MembershipFunctions;
 
 namespace FLS
 {
 	/// <summary>
-	/// A Middle of Maximum fuzzy logic engine.
+	/// A Center of Gravity fuzzy logic engine.
 	/// </summary>
-	public class MoMFuzzyEngine : BaseFuzzyEngine
+	public class FuzzyEngine<T> : BaseFuzzyEngine where T : IDefuzzType<T>
 	{
 		#region Public Methods
 
@@ -36,9 +37,9 @@ namespace FLS
 			if (_rules.Any(r => false == r.IsValid()))
 				throw new Exception(ErrorMessages.RulesAreInvalid);
 
-			if (_rules.Any(r => r.Premise.Any(c => false == c.MembershipFunction is IMoMMembershipFunction)
-				|| false == r.Conclusion.MembershipFunction is IMoMMembershipFunction))
-				throw new Exception(ErrorMessages.MembershipFunctionsCoG);
+			if (_rules.Any(r => r.Premise.Any(c => false == c.MembershipFunction is T)
+				|| false == r.Conclusion.MembershipFunction is T))
+				throw new Exception(String.Format(ErrorMessages.MembershipFunctionsDefuzzType, typeof(T)));
 
 			SetVariableInputValues(inputValues);
 
@@ -50,10 +51,10 @@ namespace FLS
 				var premiseValue = Evaluate(fuzzyRule.Premise);
 
 				var ruleConclusionVar = fuzzyRule.Conclusion.Variable;
-				IMoMMembershipFunction membershipFunction = ruleConclusionVar.MembershipFunctions.First(mf => mf.Name == fuzzyRule.Conclusion.MembershipFunction.Name) as IMoMMembershipFunction;
+				T membershipFunction = (T)ruleConclusionVar.MembershipFunctions.First(mf => mf.Name == fuzzyRule.Conclusion.MembershipFunction.Name);
 
-				var midMaximum = membershipFunction.MiddleMaximum();
-				finalValue += premiseValue * midMaximum;
+				var midPoint = membershipFunction.MidPoint();
+				finalValue += premiseValue * midPoint;
 
 				premiseValuesSum += premiseValue;
 			}
@@ -63,6 +64,7 @@ namespace FLS
 			else
 				return finalValue / premiseValuesSum;
 		}
+
 
 		#endregion
 	}

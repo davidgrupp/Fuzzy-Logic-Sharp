@@ -14,19 +14,20 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License. 
 #endregion
+using FLS.Constants;
+using FLS.MembershipFunctions;
+using FLS.Rules;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FLS;
-using FLS.Rules;
 
 namespace FLS.Tests
 {
 	[TestFixture]
-	public class UsageExampleTests
+	public class FuzzyEngineTests
 	{
 		[SetUp]
 		public void Setup()
@@ -35,7 +36,8 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		public void UsageExample_Success()
+		[ExpectedException(ExpectedException = typeof(Exception), ExpectedMessage = ErrorMessages.RulesAreInvalid)]
+		public void FuzzyEngine_InvalidRules_Success()
 		{
 			//Arrange
 			LinguisticVariable water = new LinguisticVariable("Water");
@@ -48,23 +50,43 @@ namespace FLS.Tests
 			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
 
 
-			IFuzzyEngine fuzzyEngine = new FuzzyEngineFactory().Default();
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
 
-			fuzzyEngine.Rules.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
-			fuzzyEngine.Rules.If(water.Is(hot)).Then(power.Is(low));
+			fuzzyEngine.Rules.If(water.Is(hot));
 
 			//Act
 			var result = fuzzyEngine.Defuzzify(new { water = 60 });
 
 			//Assert
-			Assert.That(Math.Floor(result), Is.EqualTo(Math.Floor(40M)));
-
-			//Extra
-			System.Diagnostics.Debug.WriteLine(result);
 		}
 
+		[Test]
+		[ExpectedException(ExpectedException = typeof(Exception))]
+		public void FuzzyEngine_InvalidMembershipFunctions_Success()
+		{
+			//Arrange
+			LinguisticVariable water = new LinguisticVariable("Water");
+			var testMF = new MockMembershipFunction();
+			water.MembershipFunctions.Add(testMF);
+
+			LinguisticVariable power = new LinguisticVariable("Power");
+			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
 
 
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
 
+			fuzzyEngine.Rules.If(water.Is(testMF)).Then(power.Is(high));
+
+			//Act
+			var result = fuzzyEngine.Defuzzify(new { water = 60 });
+		}
+
+		internal class MockMembershipFunction : FuzzyRuleToken, IMembershipFunction
+		{
+			public double Fuzzify(double inputValue)
+			{
+				throw new NotImplementedException("This method is implmentation is for tests only.");
+			}
+		}
 	}
 }

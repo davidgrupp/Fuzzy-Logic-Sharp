@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoGFuzzyEngineTests.cs" />
+    <Compile Include="FuzzyEngineTests.cs" />
     <Compile Include="FuzzyRuleTests.cs" />
     <Compile Include="GaussianMembershipFunctionTests.cs" />
     <Compile Include="MoMFuzzyEngineTests.cs" />
