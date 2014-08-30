@@ -26,7 +26,7 @@ namespace FLS.MembershipFunctions
 	/// <summary>
 	/// A membership function.
 	/// </summary>
-	public class TrapezoidMembershipFunction : FuzzyRuleToken, IMembershipFunction, ICoGDefuzzification, IMoMDefuzzification
+	public class TrapezoidMembershipFunction : FuzzyRuleToken, IMembershipFunction
 	{
 		#region Private Properties
 
@@ -52,6 +52,12 @@ namespace FLS.MembershipFunctions
 			_c = c;
 			_d = d;
 		}
+
+		#endregion
+
+		#region public Properties
+
+		public Double Modification { get; set; }
 
 		#endregion
 
@@ -81,18 +87,6 @@ namespace FLS.MembershipFunctions
 		}
 
 		/// <summary>
-		/// Calculate the Middle of Maximum of a trapezoidal membership function.
-		/// </summary>
-		/// <returns></returns>
-		private Double MiddleMaximum()
-		{
-			var top = _c - _b;
-			var topMidpoint = _b + (top / 2.0);
-
-			return topMidpoint;
-		}
-
-		/// <summary>
 		/// Calculates a crisp value's degree of membership.
 		/// </summary>
 		/// <param name="inputValue">The crisp value to fuzzify.</param>
@@ -109,15 +103,15 @@ namespace FLS.MembershipFunctions
 				return 0;
 		}
 
-		double IDefuzzType<ICoGDefuzzification>.MidPoint()
+		public Double Min()
 		{
-			return Centroid();
+			return _a;
 		}
 
-		double IDefuzzType<IMoMDefuzzification>.MidPoint()
+		public Double Max()
 		{
-			return MiddleMaximum();
-		}		
+			return _d;
+		}
 
 		#endregion
 

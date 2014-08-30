@@ -14,6 +14,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License. 
 #endregion
+using FLS.MembershipFunctions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,28 @@ using System.Threading.Tasks;
 
 namespace FLS
 {
-	public interface IMoMDefuzzification : IDefuzzType<IMoMDefuzzification>
+	public class CoGDefuzzification : IDefuzzification
 	{
+		public Double Defuzzify(List<IMembershipFunction> functions)
+		{
+			var minX = functions.Select(f => f.Min()).Min();
+			var maxX = functions.Select(f => f.Max()).Max();
+
+			//var max = 200;
+			var mid = 0.0;
+			var sum = 0.0;
+			var sumx = 0.0;
+
+			for (var i = minX; i <= maxX; i += 1)
+			{
+				var maxAtX = functions.Select(f => Math.Min(f.Modification, f.Fuzzify(i))).Max();
+				sum += maxAtX;
+				sumx += i * maxAtX;
+			}
+
+			mid = sumx / sum;
+
+			return mid;
+		}
 	}
 }

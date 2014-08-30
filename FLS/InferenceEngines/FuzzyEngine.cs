@@ -25,23 +25,25 @@ using FLS.MembershipFunctions;
 
 namespace FLS
 {
-	public class FuzzyEngine<T> : IFuzzyEngine where T : IDefuzzType<T>
+	public class FuzzyEngine : IFuzzyEngine
 	{
-		public FuzzyEngine()
-			: this(new FuzzyRuleEvaluator())
+		public FuzzyEngine(IDefuzzification defuzzification)
+			: this(defuzzification, new FuzzyRuleEvaluator())
 		{
 
 		}
 
-		public FuzzyEngine(IFuzzyRuleEvaluator fuzzyRuleEvaluator)
+		public FuzzyEngine(IDefuzzification defuzzification, IFuzzyRuleEvaluator fuzzyRuleEvaluator)
 		{
 			_fuzzyRuleEvaluator = fuzzyRuleEvaluator;
+			_defuzzification = defuzzification;
 		}
 
 		#region Private Properties
 
 		protected FuzzyRuleCollection _rules;
 		protected IFuzzyRuleEvaluator _fuzzyRuleEvaluator;
+		protected IDefuzzification _defuzzification;
 
 		#endregion
 
@@ -77,32 +79,21 @@ namespace FLS
 			if (_rules.Any(r => false == r.IsValid()))
 				throw new Exception(ErrorMessages.RulesAreInvalid);
 
-			if (_rules.Any(r => r.Premise.Any(c => false == c.MembershipFunction is T)
-				|| false == r.Conclusion.MembershipFunction is T))
-				throw new Exception(String.Format(ErrorMessages.MembershipFunctionsDefuzzType, typeof(T)));
-
 			SetVariableInputValues(inputValues);
 
-			double finalValue = 0;
-			double premiseValuesSum = 0;
+			var conclustionMembershipFunctions = _rules.Select(r=>r.Conclusion.MembershipFunction).ToList();
 
 			foreach (FuzzyRule fuzzyRule in _rules)
 			{
 				var premiseValue = _fuzzyRuleEvaluator.Evaluate(fuzzyRule.Premise);
 
 				var ruleConclusionVar = fuzzyRule.Conclusion.Variable;
-				T membershipFunction = (T)ruleConclusionVar.MembershipFunctions.First(mf => mf.Name == fuzzyRule.Conclusion.MembershipFunction.Name);
+				var membershipFunction = ruleConclusionVar.MembershipFunctions.First(mf => mf.Name == fuzzyRule.Conclusion.MembershipFunction.Name);
 
-				var midPoint = membershipFunction.MidPoint();
-				finalValue += premiseValue * midPoint;
-
-				premiseValuesSum += premiseValue;
+				membershipFunction.Modification = premiseValue;
 			}
 
-			if (0 == finalValue && 0 == premiseValuesSum)
-				return 0;
-			else
-				return finalValue / premiseValuesSum;
+			return _defuzzification.Defuzzify(conclustionMembershipFunctions);
 		}
 
 

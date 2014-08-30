@@ -56,7 +56,7 @@ namespace FLS.Tests
 			var result = fuzzyEngine.Defuzzify(new { water = 60 });
 
 			//Assert
-			Assert.That(Math.Floor(result), Is.EqualTo(Math.Floor(40M)));
+			Assert.That(Math.Floor(result), Is.EqualTo(Math.Floor(39.0)));
 
 			//Extra
 			System.Diagnostics.Debug.WriteLine(result);

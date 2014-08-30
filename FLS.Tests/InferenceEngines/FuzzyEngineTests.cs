@@ -50,7 +50,7 @@ namespace FLS.Tests
 			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
 
 
-			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine(new CoGDefuzzification());
 
 			fuzzyEngine.Rules.If(water.Is(hot));
 
@@ -60,33 +60,6 @@ namespace FLS.Tests
 			//Assert
 		}
 
-		[Test]
-		[ExpectedException(ExpectedException = typeof(Exception))]
-		public void FuzzyEngine_InvalidMembershipFunctions_Success()
-		{
-			//Arrange
-			LinguisticVariable water = new LinguisticVariable("Water");
-			var testMF = new MockMembershipFunction();
-			water.MembershipFunctions.Add(testMF);
 
-			LinguisticVariable power = new LinguisticVariable("Power");
-			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
-
-
-			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
-
-			fuzzyEngine.Rules.If(water.Is(testMF)).Then(power.Is(high));
-
-			//Act
-			var result = fuzzyEngine.Defuzzify(new { water = 60 });
-		}
-
-		internal class MockMembershipFunction : FuzzyRuleToken, IMembershipFunction
-		{
-			public double Fuzzify(double inputValue)
-			{
-				throw new NotImplementedException("This method is implmentation is for tests only.");
-			}
-		}
 	}
 }

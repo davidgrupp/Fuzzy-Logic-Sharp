@@ -49,21 +49,5 @@ namespace FLS.Tests
 			Assert.That(Math.Round(result, 3), Is.EqualTo(expectedResult));
 		}
 
-		[Test]
-		[TestCase(50, 20, 50)]
-		[TestCase(40, 20, 41)]
-		[TestCase(10, 20, 19)]
-		[TestCase(50, 10, 50)]
-		public void GaussianCentroid_Success(double c, double tou, double expectedResult)
-		{
-			//Arrange
-			var membershipFunction = new GaussianMembershipFunction("test", c, tou);
-
-			//Act
-			var result = membershipFunction.Centroid();
-
-			//Assert
-			Assert.That(Math.Floor(result), Is.EqualTo(expectedResult));
-		}
 	}
 }

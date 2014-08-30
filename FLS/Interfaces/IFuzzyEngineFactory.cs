@@ -25,7 +25,7 @@ namespace FLS
 	{
 		IFuzzyEngine Default();
 
-		IFuzzyEngine Create<T>() where T : IDefuzzType<T>;
+		IFuzzyEngine Create(IDefuzzification defuzzification);
 
 		IFuzzyEngine Create(FuzzyEngineType type);
 	}

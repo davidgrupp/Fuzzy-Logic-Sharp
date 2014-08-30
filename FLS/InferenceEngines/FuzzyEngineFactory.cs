@@ -43,12 +43,12 @@ namespace FLS
 
 		public IFuzzyEngine Default()
 		{
-			return Create<ICoGDefuzzification>();
+			return Create(new CoGDefuzzification());
 		}
 
-		public IFuzzyEngine Create<T>() where T : IDefuzzType<T>
+		public IFuzzyEngine Create(IDefuzzification defuzzification)
 		{
-			return new FuzzyEngine<T>(_fuzzyRuleEvaluator);
+			return new FuzzyEngine(defuzzification, _fuzzyRuleEvaluator);
 		}
 
 		public IFuzzyEngine Create(FuzzyEngineType type)
@@ -56,9 +56,9 @@ namespace FLS
 			switch (type)
 			{
 				case FuzzyEngineType.CoG:
-					return Create<ICoGDefuzzification>();
+					return Create(new CoGDefuzzification());
 				case FuzzyEngineType.MoM:
-					return Create<IMoMDefuzzification>();
+					return Create(new MoMDefuzzification());
 				default:
 					throw new ArgumentException("Cannot create engine with type.");
 			}

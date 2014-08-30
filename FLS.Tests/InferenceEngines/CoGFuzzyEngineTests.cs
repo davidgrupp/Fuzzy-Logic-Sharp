@@ -35,7 +35,7 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(60, 40)]
+		[TestCase(60, 39)]
 		public void CoG_Defuzzify_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange
@@ -49,7 +49,7 @@ namespace FLS.Tests
 			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
 
 
-			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine(new CoGDefuzzification());
 
 			fuzzyEngine.Rules.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
 			fuzzyEngine.Rules.If(water.Is(hot)).Then(power.Is(low));
@@ -62,7 +62,7 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(60, 66)]
+		[TestCase(60, 76)]
 		public void CoG_Defuzzify2_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange
@@ -77,7 +77,7 @@ namespace FLS.Tests
 			var high = power.MembershipFunctions.AddTriangle("High", 50, 100, 150);
 
 
-			IFuzzyEngine fuzzyEngine = new FuzzyEngine<ICoGDefuzzification>();
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine(new CoGDefuzzification());
 
 			fuzzyEngine.Rules.If(water.Is(cold)).Then(power.Is(high));
 			fuzzyEngine.Rules.If(water.Is(warm)).Then(power.Is(med));
@@ -89,5 +89,6 @@ namespace FLS.Tests
 			//Assert
 			Assert.That(Math.Floor(result), Is.EqualTo(Math.Floor(expectedValue)));
 		}
+
 	}
 }

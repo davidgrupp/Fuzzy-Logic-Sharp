@@ -22,7 +22,7 @@ using System.Text;
 
 namespace FLS.MembershipFunctions
 {
-	public class CompositeMembershipFunction : FuzzyRuleToken, IMembershipFunction, ICoGDefuzzification, IMoMDefuzzification
+	public class CompositeMembershipFunction : FuzzyRuleToken, IMembershipFunction
 	{
 		public CompositeMembershipFunction(String name, IMembershipFunction leftFunction, IMembershipFunction rightFunction, double midPoint)
 			: base(name, FuzzyRuleTokenType.Function)
@@ -36,7 +36,9 @@ namespace FLS.MembershipFunctions
 		private IMembershipFunction _rightFunction;
 		private double _midPoint;
 
-		public double Fuzzify(double inputValue)
+		#region Public Methods
+
+		public virtual Double Fuzzify(Double inputValue)
 		{
 			if (inputValue <= _midPoint)
 			{
@@ -48,61 +50,23 @@ namespace FLS.MembershipFunctions
 			}
 		}
 
-		private Double Centroid()
+		public virtual Double Min()
 		{
-			var max = 200;
-			var mid = 0.0;
-			var sum = 0.0;
-			var sumx = 0.0;
-
-			for (var i = 0.0; i < max; i += 1)
-			{
-				sum += Fuzzify(i);
-				sumx += i * Fuzzify(i);
-			}
-
-			mid = sumx / sum;
-
-			return mid;
+			return 0;
 		}
 
-
-		private Double MiddleMaximum()
+		public virtual Double Max()
 		{
-			var vals = 200;
-
-			var max = 0.0;
-			var startMax = 0.0;
-			var len = 0.0;
-
-			for (var i = 0.0; i < vals; i += 1)
-			{
-				var fuzVal = Fuzzify(i);
-				if (max < fuzVal)
-				{
-					max = fuzVal;
-					startMax = i;
-					len = 0.0;
-				}
-				else if (max == fuzVal)
-				{
-					len++;
-				}
-			}
-
-			var mid = startMax + ((startMax - len) / 2.0);
-
-			return mid;
+			return 200;
 		}
 
-		double IDefuzzType<ICoGDefuzzification>.MidPoint()
-		{
-			return Centroid();
-		}
+		#endregion
 
-		double IDefuzzType<IMoMDefuzzification>.MidPoint()
-		{
-			return MiddleMaximum();
-		}
+		#region public Properties
+
+		public Double Modification { get; set; }
+
+		#endregion
+
 	}
 }

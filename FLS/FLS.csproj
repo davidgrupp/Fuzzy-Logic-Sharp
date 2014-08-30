@@ -40,9 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\ErrorMessages.cs" />
-    <Compile Include="Defuzzification\ICoGDefuzzification.cs" />
-    <Compile Include="Defuzzification\IDefuzzType.cs" />
-    <Compile Include="Defuzzification\IMoMDefuzzification.cs" />
+    <Compile Include="Defuzzification\CoGDefuzzification.cs" />
+    <Compile Include="Interfaces\IDefuzzification.cs" />
+    <Compile Include="Defuzzification\MoMDefuzzification.cs" />
     <Compile Include="Extensions\FuzzyRuleExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
