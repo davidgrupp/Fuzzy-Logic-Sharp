@@ -46,8 +46,7 @@ namespace FLS.Tests
 			LinguisticVariable power = new LinguisticVariable("Power");
 			var low = power.MembershipFunctions.AddTriangle("Low", 0, 25, 50);
 			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
-
-
+			
 			IFuzzyEngine fuzzyEngine = new FuzzyEngineFactory().Default();
 
 			fuzzyEngine.Rules.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
