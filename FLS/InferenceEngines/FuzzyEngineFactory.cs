@@ -25,7 +25,7 @@ namespace FLS
 	{
 		public IFuzzyEngine Default()
 		{
-			return new FuzzyEngine<ICoGDefuzzification>();
+			return Create<ICoGDefuzzification>();
 		}
 
 		public IFuzzyEngine Create<T>() where T : IDefuzzType<T>
