@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FLS")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Fuzzy Logic Sharp. A fuzzy logic library for .NET")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("David Grupp")]
 [assembly: AssemblyProduct("FLS")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
