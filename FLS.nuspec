@@ -9,7 +9,9 @@
     <projectUrl>https://github.com/davidgrupp/FLS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial Build.</releaseNotes>
+    <releaseNotes><![CDATA[
+            For full release notes see https://github.com/davidgrupp/FLS/blob/master/releasenotes.md
+            ]]></releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Fuzzy Logic</tags>
   </metadata>
