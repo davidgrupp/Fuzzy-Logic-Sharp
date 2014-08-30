@@ -6,6 +6,8 @@ Fuzzy Logic Sharp is an open source library implementing a simple to use fuzzy l
 
 ### License: Apache License 2.0  
 
+### [Install via NuGet](https://www.nuget.org/packages/FLS/)
+
 ### Contributors
 
 This project is looking for more contributors. If you have any interest in helping feel free to contact me or fork the project. We will make every effort to quickly evaluate and merge pull request that benefit the project.
