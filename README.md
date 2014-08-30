@@ -17,7 +17,7 @@ This project is looking for more contributors. If you have any interest in helpi
 + Implements a verity of membership functions.
 + Easy to use syntac for creating system rules.
 + Simple design that allows for user extensibility.
-+ Easy installation via [NuGet](https://www.nuget.org/packages/FLS/]
++ Easy installation via [NuGet](https://www.nuget.org/packages/FLS/)
 
 ### Usage
 ```csharp
