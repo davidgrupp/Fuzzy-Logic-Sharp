@@ -25,9 +25,6 @@ using FLS.MembershipFunctions;
 
 namespace FLS
 {
-	/// <summary>
-	/// A Center of Gravity fuzzy logic engine.
-	/// </summary>
 	public class FuzzyEngine<T> : BaseFuzzyEngine where T : IDefuzzType<T>
 	{
 		#region Public Methods

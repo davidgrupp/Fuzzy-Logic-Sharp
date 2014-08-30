@@ -38,9 +38,9 @@ namespace FLS
 			switch (type)
 			{
 				case FuzzyEngineType.CoG:
-					return new FuzzyEngine<ICoGDefuzzification>();
+					return Create<ICoGDefuzzification>();
 				case FuzzyEngineType.MoM:
-					return new FuzzyEngine<IMoMDefuzzification>();
+					return Create<IMoMDefuzzification>();
 				default:
 					throw new ArgumentException("Cannot create engine with type.");
 			}
