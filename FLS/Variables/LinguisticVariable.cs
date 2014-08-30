@@ -28,13 +28,6 @@ namespace FLS
 	/// </summary>
 	public class LinguisticVariable : FuzzyRuleToken
 	{
-		#region Private Properties
-
-		private MembershipFunctionCollection _membershipFunctions;
-		private Double _inputValue = 0;
-
-		#endregion
-
 		#region Constructors
 
 		public LinguisticVariable(string name)
@@ -42,6 +35,13 @@ namespace FLS
 		{
 			_membershipFunctions = new MembershipFunctionCollection();
 		}
+
+		#endregion
+
+		#region Private Properties
+
+		private MembershipFunctionCollection _membershipFunctions;
+		private Double _inputValue = 0;
 
 		#endregion
 
