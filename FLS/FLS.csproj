@@ -54,9 +54,7 @@
     <Compile Include="InferenceEngines\IFuzzyEngineFactory.cs" />
     <Compile Include="MembershipFunctions\CompositeMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\GaussianMembershipFunction.cs" />
-    <Compile Include="MembershipFunctions\ICoGMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\IMembershipFunction.cs" />
-    <Compile Include="MembershipFunctions\IMoMMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\MembershipFunctionCollection.cs" />
     <Compile Include="MembershipFunctions\TrapezoidMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\TriangleMembershipFunction.cs" />

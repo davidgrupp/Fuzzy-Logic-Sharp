@@ -22,7 +22,7 @@ using System.Text;
 
 namespace FLS.MembershipFunctions
 {
-	public class CompositeMembershipFunction : FuzzyRuleToken, IMembershipFunction, ICoGMembershipFunction, IMoMMembershipFunction
+	public class CompositeMembershipFunction : FuzzyRuleToken, IMembershipFunction, ICoGDefuzzification, IMoMDefuzzification
 	{
 		public CompositeMembershipFunction(String name, IMembershipFunction leftFunction, IMembershipFunction rightFunction, double midPoint)
 			: base(name, FuzzyRuleTokenType.Function)
@@ -48,7 +48,7 @@ namespace FLS.MembershipFunctions
 			}
 		}
 
-		public Double Centroid()
+		private Double Centroid()
 		{
 			var max = 200;
 			var mid = 0.0;
@@ -67,7 +67,7 @@ namespace FLS.MembershipFunctions
 		}
 
 
-		public Double MiddleMaximum()
+		private Double MiddleMaximum()
 		{
 			var vals = 200;
 
@@ -93,6 +93,16 @@ namespace FLS.MembershipFunctions
 			var mid = startMax + ((startMax - len) / 2.0);
 
 			return mid;
+		}
+
+		double IDefuzzType<ICoGDefuzzification>.MidPoint()
+		{
+			return Centroid();
+		}
+
+		double IDefuzzType<IMoMDefuzzification>.MidPoint()
+		{
+			return MiddleMaximum();
 		}
 	}
 }
