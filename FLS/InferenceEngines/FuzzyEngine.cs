@@ -79,6 +79,9 @@ namespace FLS
 			if (_rules.Any(r => false == r.IsValid()))
 				throw new Exception(ErrorMessages.RulesAreInvalid);
 
+			//reset membership functions
+			_rules.ForEach(r => r.Conclusion.MembershipFunction.Modification = 0);
+	
 			SetVariableInputValues(inputValues);
 
 			var conclustionMembershipFunctions = _rules.Select(r=>r.Conclusion.MembershipFunction).ToList();
