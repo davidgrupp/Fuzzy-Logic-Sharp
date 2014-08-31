@@ -7,6 +7,7 @@ Bug Fixes
 ### 1.1.0
 Features
 + Defuzzification uses the composite function of the conclustion functions.
+
 Bug Fixes
 + Fixed rule evaluation with multiple conditions.
 
