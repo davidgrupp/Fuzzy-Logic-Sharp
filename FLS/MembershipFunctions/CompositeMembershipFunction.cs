@@ -46,18 +46,18 @@ namespace FLS.MembershipFunctions
 			}
 			else
 			{
-				return _leftFunction.Fuzzify(inputValue);
+				return _rightFunction.Fuzzify(inputValue);
 			}
 		}
 
 		public virtual Double Min()
 		{
-			return 0;
+			return _leftFunction.Min();
 		}
 
 		public virtual Double Max()
 		{
-			return 200;
+			return _rightFunction.Max();
 		}
 
 		#endregion

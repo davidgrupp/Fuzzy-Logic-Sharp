@@ -49,5 +49,30 @@ namespace FLS.Tests
 			Assert.That(Math.Round(result, 3), Is.EqualTo(expectedResult));
 		}
 
+		[Test]
+		public void GaussianMin_Success()
+		{
+			//Arrange
+			var membershipFunction = new GaussianMembershipFunction("test", 50, 20);
+
+			//Act
+			var result = membershipFunction.Min();
+
+			//Assert
+			Assert.That(result, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void GaussianMax_Success()
+		{
+			//Arrange
+			var membershipFunction = new GaussianMembershipFunction("test", 50, 20);
+
+			//Act
+			var result = membershipFunction.Max();
+
+			//Assert
+			Assert.That(result, Is.EqualTo(200));
+		}
 	}
 }

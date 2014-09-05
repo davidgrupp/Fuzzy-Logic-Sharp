@@ -22,10 +22,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FLS.Tests
+namespace FLS.Tests.MembershipFunctions
 {
 	[TestFixture]
-	public class TrapezoidMembershipFunctionTests
+	public class CompositeMembershipFunctionTests
 	{
 		[SetUp]
 		public void Setup()
@@ -34,53 +34,52 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(0, 0, 20, 40, 0, 1)]
-		[TestCase(0, 0, 20, 40, 1, 1)]
-		[TestCase(0, 0, 20, 40, 100, 0)]
-		[TestCase(0, 0, 20, 40, 30, 0.5)]
-		[TestCase(10, 20, 30, 40, 0, 0)]
-		public void TrapezoidFuzzify_Success(double x0, double x1, double x2, double x3, double inputValue, double expectedResult)
+		[TestCase(0, 0)]
+		[TestCase(10, 1)]
+		[TestCase(20, 1)]
+		[TestCase(15, .5)]
+		public void CompositeFuzzify_Success(double inputValue, double expectedResult)
 		{
 			//Arrange
-			var membershipFunction = new TrapezoidMembershipFunction("test", x0, x1, x2, x3);
+			var triMF1 = new TriangleMembershipFunction("t1", 0, 10, 20);
+			var triMF2 = new TriangleMembershipFunction("t2", 10, 20, 30);
+			var membershipFunction = new CompositeMembershipFunction("test", triMF1, triMF2, 15.0);
 
 			//Act
 			var result = membershipFunction.Fuzzify(inputValue);
 
 			//Assert
-			Assert.That(result, Is.EqualTo(expectedResult));
+			Assert.That(Math.Round(result, 3), Is.EqualTo(expectedResult));
 		}
 
 		[Test]
-		[TestCase(0, 0, 20, 40, 0)]
-		[TestCase(-50, 0, 20, 40, -50)]
-		[TestCase(10, 20, 30, 40, 10)]
-		public void TrapezoidMin_Success(double x0, double x1, double x2, double x3, double expectedResult)
+		public void CompositeMin_Success()
 		{
 			//Arrange
-			var membershipFunction = new TrapezoidMembershipFunction("test", x0, x1, x2, x3);
+			var triMF1 = new TriangleMembershipFunction("t1", 0, 10, 20);
+			var triMF2 = new TriangleMembershipFunction("t2", 10, 20, 30);
+			var membershipFunction = new CompositeMembershipFunction("test", triMF1, triMF2, 15.0);
 
 			//Act
 			var result = membershipFunction.Min();
 
 			//Assert
-			Assert.That(result, Is.EqualTo(expectedResult));
+			Assert.That(result, Is.EqualTo(0));
 		}
 
 		[Test]
-		[TestCase(-40, -40, -20, 0, 0)]
-		[TestCase(-50, -50, -20, -10, -10)]
-		[TestCase(10, 20, 30, 40, 40)]
-		public void TrapezoidMax_Success(double x0, double x1, double x2, double x3, double expectedResult)
+		public void CompositeMax_Success()
 		{
 			//Arrange
-			var membershipFunction = new TrapezoidMembershipFunction("test", x0, x1, x2, x3);
+			var triMF1 = new TriangleMembershipFunction("t1", 0, 10, 20);
+			var triMF2 = new TriangleMembershipFunction("t2", 10, 20, 30);
+			var membershipFunction = new CompositeMembershipFunction("test", triMF1, triMF2, 15.0);
 
 			//Act
 			var result = membershipFunction.Max();
 
 			//Assert
-			Assert.That(result, Is.EqualTo(expectedResult));
+			Assert.That(result, Is.EqualTo(30));
 		}
 	}
 }
