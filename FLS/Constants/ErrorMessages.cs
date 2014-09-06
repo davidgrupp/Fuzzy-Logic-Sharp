@@ -26,5 +26,6 @@ namespace FLS.Constants
 		public const String RulesAreInvalid = "One or more rules is invalid.";
 		public const String InputValusMustBeValid = "Must provide a double, decimal, or integer input value for all variables. Missing: {0}";
 		public const String MembershipFunctionsDefuzzType = "All membership functions must be {0} defuzz type.";
+		public const String AllMembershipFunctionsMustBeTrapezoid = "All membership functions must be trapezoid and triangle.";
 	}
 }

@@ -25,12 +25,15 @@ namespace FLS
 {
 	public class CoGDefuzzification : IDefuzzification
 	{
+		private TrapezoidCoGDefuzzification _trapezoidCoGDefuzzification = new TrapezoidCoGDefuzzification();
 		public Double Defuzzify(List<IMembershipFunction> functions)
 		{
+			if (functions.All(f => f is TrapezoidMembershipFunction))
+				return _trapezoidCoGDefuzzification.Defuzzify(functions);
+
 			var minX = functions.Select(f => f.Min()).Min();
 			var maxX = functions.Select(f => f.Max()).Max();
 
-			//var max = 200;
 			var mid = 0.0;
 			var sum = 0.0;
 			var sumx = 0.0;

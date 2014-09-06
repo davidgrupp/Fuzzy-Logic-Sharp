@@ -59,6 +59,14 @@ namespace FLS.MembershipFunctions
 
 		public Double Modification { get; set; }
 
+		public Double A { get { return _a; } }
+
+		public Double B { get { return _b; } }
+
+		public Double C { get { return _c; } }
+
+		public Double D { get { return _d; } }
+
 		#endregion
 
 		#region Public Methods
