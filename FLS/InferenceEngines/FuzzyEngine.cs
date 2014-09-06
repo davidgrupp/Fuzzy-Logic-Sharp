@@ -57,13 +57,13 @@ namespace FLS
 
 			foreach (var variable in conditionVariables)
 			{
-				if (false == inputVals.Any(kv => kv.Key.ToLower() == variable.Name.ToLower() && kv.Value is Int32))
+				if (false == inputVals.Any(kv => kv.Key.ToLower() == variable.Name.ToLower() && (kv.Value is Int32 || kv.Value is Double || kv.Value is Decimal)))
 				{
-					throw new ArgumentException(String.Format(ErrorMessages.InputValusMustBeIntegers, variable.Name));
+					throw new ArgumentException(String.Format(ErrorMessages.InputValusMustBeValid, variable.Name));
 				}
 				else
 				{
-					var inputValue = (Int32)inputVals.First(kv => kv.Key.ToLower() == variable.Name.ToLower()).Value;
+					var inputValue = Convert.ToDouble(inputVals.First(kv => kv.Key.ToLower() == variable.Name.ToLower()).Value);
 					variable.InputValue = inputValue;
 				}
 			}
@@ -81,10 +81,10 @@ namespace FLS
 
 			//reset membership functions
 			_rules.ForEach(r => r.Conclusion.MembershipFunction.Modification = 0);
-	
+
 			SetVariableInputValues(inputValues);
 
-			var conclustionMembershipFunctions = _rules.Select(r=>r.Conclusion.MembershipFunction).ToList();
+			var conclustionMembershipFunctions = _rules.Select(r => r.Conclusion.MembershipFunction).ToList();
 
 			foreach (FuzzyRule fuzzyRule in _rules)
 			{
@@ -111,7 +111,11 @@ namespace FLS
 				_rules = _rules ?? new FuzzyRuleCollection();
 				return _rules;
 			}
-			private set { _rules = value; }
+		}
+
+		public IDefuzzification Defuzzification
+		{
+			get { return _defuzzification; }
 		}
 
 		#endregion

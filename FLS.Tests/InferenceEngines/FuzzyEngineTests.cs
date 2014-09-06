@@ -60,6 +60,29 @@ namespace FLS.Tests
 			//Assert
 		}
 
+		[Test]
+		[ExpectedException(ExpectedException = typeof(ArgumentException))]
+		public void FuzzyEngine_InvalidInputs_Success()
+		{
+			//Arrange
+			LinguisticVariable water = new LinguisticVariable("Water");
+			var cold = water.MembershipFunctions.AddTrapezoid("Cold", 0, 0, 20, 40);
+			var warm = water.MembershipFunctions.AddTriangle("Warm", 30, 50, 70);
+			var hot = water.MembershipFunctions.AddTrapezoid("Hot", 50, 80, 100, 100);
 
+			LinguisticVariable power = new LinguisticVariable("Power");
+			var low = power.MembershipFunctions.AddTriangle("Low", 0, 25, 50);
+			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
+
+
+			IFuzzyEngine fuzzyEngine = new FuzzyEngine(new CoGDefuzzification());
+
+			fuzzyEngine.Rules.If(water.Is(hot)).Then(power.Is(high));
+
+			//Act
+			var result = fuzzyEngine.Defuzzify(new { water = "invalid input" });
+
+			//Assert
+		}
 	}
 }

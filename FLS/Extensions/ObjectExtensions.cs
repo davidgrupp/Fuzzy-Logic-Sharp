@@ -38,7 +38,7 @@ namespace FLS
 			}
 			catch (NullReferenceException e)
 			{
-				throw new ArgumentNullException("Paramters cannot be a null object", e);
+				throw new ArgumentNullException("Parameters cannot be a null object", e);
 			}
 
 			return values;

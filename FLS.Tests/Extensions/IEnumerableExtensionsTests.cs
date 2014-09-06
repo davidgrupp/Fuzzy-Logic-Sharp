@@ -83,7 +83,31 @@ namespace MoreLinq.Test
 			var distinct = source.DistinctBy(word => word.Length, null);
 			distinct.AssertSequenceEqual("first", "second");
 		}
-				
+
+		[Test]
+		public void ForEach_Success()
+		{
+			var sum = String.Empty;
+			string[] source = { "first", "second", "third", "fourth", "fifth" };
+			source.ForEach(word => sum += word);
+			Assert.That(sum, Is.EqualTo("first" + "second" + "third" + "fourth" + "fifth"));
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void ForEach_NullAction_Success()
+		{
+			string[] source = { };
+			source.ForEach(null);
+		}
+
+		[Test]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void ForEach_NullSource_Success()
+		{
+			string[] source = null;
+			source.ForEach(word => word.ToLower());
+		}
 	}
 
 	internal static class TestExtensions

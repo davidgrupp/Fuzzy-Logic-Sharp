@@ -44,8 +44,10 @@
   <ItemGroup>
     <Compile Include="Extensions\IEnumerableExtensionsTests.cs" />
     <Compile Include="InferenceEngines\CoGFuzzyEngineTests.cs" />
+    <Compile Include="InferenceEngines\FuzzyEngineFactoryTests.cs" />
     <Compile Include="InferenceEngines\FuzzyEngineTests.cs" />
     <Compile Include="MembershipFunctions\CompositeMembershipFunctionTests.cs" />
+    <Compile Include="MembershipFunctions\MembershipFunctionCollectionTests.cs" />
     <Compile Include="Rules\FuzzyRuleTests.cs" />
     <Compile Include="MembershipFunctions\GaussianMembershipFunctionTests.cs" />
     <Compile Include="InferenceEngines\MoMFuzzyEngineTests.cs" />

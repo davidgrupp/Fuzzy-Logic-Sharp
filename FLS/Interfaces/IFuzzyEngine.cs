@@ -25,6 +25,7 @@ namespace FLS
 	public interface IFuzzyEngine
 	{
 		FuzzyRuleCollection Rules { get; }
+		IDefuzzification Defuzzification { get; }
 		Double Defuzzify(object inputValues);
 	}
 }

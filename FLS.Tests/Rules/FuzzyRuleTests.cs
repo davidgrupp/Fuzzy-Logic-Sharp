@@ -141,17 +141,23 @@ namespace FLS.Tests.Rules
 			var rule2 = new FuzzyRule().If(water.IsNot(cold)).Then(power.Is(high)); //valid
 			var rule3 = new FuzzyRule().If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high)); //valid
 			var rule4 = new FuzzyRule().If(water.Is(cold).Or(water.Is(warm)).And(water.Is(hot))).Then(power.Is(high)); //valid
+			var rule5 = new FuzzyRule().If(water.Is(cold).And(water.Is(warm)).And(water.Is(hot))).Then(power.Is(high)); //valid
+			var rule6 = new FuzzyRule().If(water.Is(cold).Or(water.Is(warm)).Or(water.Is(hot))).Then(power.Is(high)); //valid
 
 			var result1 = rule1.IsValid();
 			var result2 = rule2.IsValid();
 			var result3 = rule3.IsValid();
 			var result4 = rule4.IsValid();
+			var result5 = rule3.IsValid();
+			var result6 = rule4.IsValid();
 
 			//Assert
 			Assert.That(result1, Is.True, "result1");
 			Assert.That(result2, Is.True, "result2");
 			Assert.That(result3, Is.True, "result3");
 			Assert.That(result4, Is.True, "result4");
+			Assert.That(result5, Is.True, "result5");
+			Assert.That(result6, Is.True, "result6");
 		}
 
 		[Test]
@@ -241,5 +247,6 @@ namespace FLS.Tests.Rules
 
 			//Assert
 		}
+
 	}
 }

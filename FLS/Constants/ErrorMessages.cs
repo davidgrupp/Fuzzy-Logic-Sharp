@@ -24,7 +24,7 @@ namespace FLS.Constants
 	public static class ErrorMessages
 	{
 		public const String RulesAreInvalid = "One or more rules is invalid.";
-		public const String InputValusMustBeIntegers = "Must provide a integer input value for all variables. Missing: {0}";
+		public const String InputValusMustBeValid = "Must provide a double, decimal, or integer input value for all variables. Missing: {0}";
 		public const String MembershipFunctionsDefuzzType = "All membership functions must be {0} defuzz type.";
 	}
 }

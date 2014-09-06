@@ -46,7 +46,6 @@
     <Compile Include="Extensions\FuzzyRuleExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="InferenceEngines\FuzzyEngine.cs" />
     <Compile Include="InferenceEngines\FuzzyEngineFactory.cs" />
     <Compile Include="Interfaces\IFuzzyEngine.cs" />
