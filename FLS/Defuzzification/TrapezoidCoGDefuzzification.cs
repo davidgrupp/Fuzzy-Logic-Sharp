@@ -24,13 +24,18 @@ using System.Threading.Tasks;
 
 namespace FLS
 {
+	/// <summary>
+	/// Uses the Center of Gravity method to calculate the defuzzification of membership functions.
+	/// This is faster alternative method to the other CoGDefuzzification class specifically for 
+	/// trapezoid and triangle membership functions
+	/// </summary>
 	public class TrapezoidCoGDefuzzification : IDefuzzification
 	{
 		public Double Defuzzify(List<IMembershipFunction> functions)
 		{
 			if (functions.Any(f => false == f is TrapezoidMembershipFunction))
 				throw new ArgumentException(ErrorMessages.AllMembershipFunctionsMustBeTrapezoid);
-			
+
 			Double numerator = 0;
 			Double denominator = 0;
 
@@ -43,21 +48,31 @@ namespace FLS
 			return (0 != denominator) ? numerator / denominator : 0;
 		}
 
-		private Double TrapezoidArea(TrapezoidMembershipFunction function)
+		private Double TrapezoidArea(TrapezoidMembershipFunction f)
 		{
-			Double a = TrapezoidCentroid(function) - function.A;
-			Double b = function.C - function.A;
+			var centroid = TrapezoidCentroid(f);
 
-			return (function.Modification * (b + (b - (a * function.Modification)))) / 2;
+			return (f.Modification * (2 * f.C - 2 * f.A - f.Modification * (centroid - f.A))) / 2; 
 		}
 
-		private Double TrapezoidCentroid(TrapezoidMembershipFunction function)
+		private Double TrapezoidCentroid(TrapezoidMembershipFunction f)
 		{
-			Double a = function.C - function.B;
-			Double b = function.D - function.A;
-			Double c = function.B - function.A;
+			var top = f.C - f.B;
+			var bot = f.D - f.A;
 
-			return ((2 * a * c) + (a * a) + (c * b) + (a * b) + (b * b)) / (3 * (a + b)) + function.A;
+			var tm = f.B + (top / 2.0); //top midpoint
+			var bm = f.A + (bot / 2.0); //bottom midpoint
+			if (tm == bm)
+				return tm;
+
+			//y value for the centroid
+			var y = ((2.0 * top) + bot) / (top + bot);
+			y = y / 3.0;
+
+			var mRecip = (tm - bm); // mRecip =  (1 / m)
+			var b = (bm / mRecip);
+
+			return (y + b) * mRecip;
 		}
 	}
 }

@@ -23,6 +23,9 @@ using System.Threading.Tasks;
 
 namespace FLS
 {
+	/// <summary>
+	/// Uses the Center of Gravity method to calculate the defuzzification of membership functions.
+	/// </summary>
 	public class CoGDefuzzification : IDefuzzification
 	{
 		private TrapezoidCoGDefuzzification _trapezoidCoGDefuzzification = new TrapezoidCoGDefuzzification();
