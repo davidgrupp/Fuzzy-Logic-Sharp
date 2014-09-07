@@ -141,7 +141,7 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(60, 68)]
+		[TestCase(60, 74)]
 		public void CoG_Defuzzify_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange
@@ -152,7 +152,7 @@ namespace FLS.Tests
 
 			LinguisticVariable power = new LinguisticVariable("Power");
 			var low = power.MembershipFunctions.AddTriangle("Low", -50, 20, 50);
-			var med = power.MembershipFunctions.AddGaussian("Medium", 50, 20);
+			var med = power.MembershipFunctions.AddGaussian("Medium", 60, 20);
 			var high = power.MembershipFunctions.AddTriangle("High", 50, 100, 150);
 
 
