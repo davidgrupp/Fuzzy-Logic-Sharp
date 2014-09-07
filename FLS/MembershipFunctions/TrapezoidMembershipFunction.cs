@@ -72,29 +72,6 @@ namespace FLS.MembershipFunctions
 		#region Public Methods
 
 		/// <summary>
-		/// Calculate the centroid of a trapezoidal membership function.
-		/// </summary>
-		/// <returns>The value of centroid.</returns>
-		private Double Centroid()
-		{
-			var top = _c - _b;
-			var bottom = _d - _a;
-
-			var topMidpoint = _b + (top / 2.0);
-			var botMidpoint = _a + (bottom / 2.0);
-			if (topMidpoint == botMidpoint)
-				return topMidpoint;
-
-			var y = ((2.0 * top) + bottom) / (top + bottom);
-			y = y / 3.0;
-
-			var m = (topMidpoint - botMidpoint);
-			var b = 1.0 - (topMidpoint * m);
-
-			return (y - b) / m;
-		}
-
-		/// <summary>
 		/// Calculates a crisp value's degree of membership.
 		/// </summary>
 		/// <param name="inputValue">The crisp value to fuzzify.</param>
