@@ -14,21 +14,22 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License. 
 #endregion
+using FLS.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace FLS.Constants
+namespace FLS.MembershipFunctions
 {
-	public static class ErrorMessages
+	public class ZShapedMembershipFunction : SShapedMembershipFunction
 	{
-		public const String RulesAreInvalid = "One or more rules is invalid.";
-		public const String InputValusMustBeValid = "Must provide a double, decimal, or integer input value for all variables. Missing: {0}";
-		public const String MembershipFunctionsDefuzzType = "All membership functions must be {0} defuzz type.";
-		public const String AllMembershipFunctionsMustBeTrapezoid = "All membership functions must be trapezoid and triangle.";
-		public const String AArgumentIsInvalid = "Argument a cannot be zero.";
-		public const String BArgumentIsInvalid = "Argument b cannot be zero.";
-		public const String TouArgumentIsInvalid = "Argument tou cannot be zero.";
+		public ZShapedMembershipFunction(String name, Double a, Double b)
+			: base(name, a, -b)
+		{
+
+		}
+
 	}
 }

@@ -29,16 +29,23 @@ namespace FLS.MembershipFunctions
 	{
 		#region Public Methods
 
-		public IMembershipFunction AddTrapezoid(String name, Double x0, Double x1, Double x2, Double x3)
+		public IMembershipFunction AddTrapezoid(String name, Double a, Double b, Double c, Double d)
 		{
-			var memFunc = new TrapezoidMembershipFunction(name, x0, x1, x2, x3);
+			var memFunc = new TrapezoidMembershipFunction(name, a, b, c, d);
 			this.Add(memFunc);
 			return memFunc;
 		}
 
-		public IMembershipFunction AddTriangle(String name, Double x0, Double x1, Double x2)
+		public IMembershipFunction AddTriangle(String name, Double a, Double b, Double c)
 		{
-			var memFunc = new TriangleMembershipFunction(name, x0, x1, x2);
+			var memFunc = new TriangleMembershipFunction(name, a, b, c);
+			this.Add(memFunc);
+			return memFunc;
+		}
+
+		public IMembershipFunction AddRectangle(String name, Double a, Double b)
+		{
+			var memFunc = new RectangleMembershipFunction(name, a, b);
 			this.Add(memFunc);
 			return memFunc;
 		}
@@ -46,6 +53,26 @@ namespace FLS.MembershipFunctions
 		public IMembershipFunction AddGaussian(String name, Double c, Double tou)
 		{
 			var memFunc = new GaussianMembershipFunction(name, c, tou);
+			this.Add(memFunc);
+			return memFunc;
+		}
+
+		public IMembershipFunction AddBell(String name, Double a, Double b, Double c)
+		{
+			var memFunc = new BellMembershipFunction(name, a, b, c);
+			this.Add(memFunc);
+			return memFunc;
+		}
+
+		public IMembershipFunction AddSShaped(String name, Double a, Double b)
+		{
+			var memFunc = new SShapedMembershipFunction(name, a, b);
+			this.Add(memFunc);
+			return memFunc;
+		}
+		public IMembershipFunction AddZShaped(String name, Double a, Double b)
+		{
+			var memFunc = new ZShapedMembershipFunction(name, a, b);
 			this.Add(memFunc);
 			return memFunc;
 		}

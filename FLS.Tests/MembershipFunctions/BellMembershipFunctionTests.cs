@@ -23,10 +23,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FLS.Tests
+namespace FLS.Tests.MembershipFunctions
 {
 	[TestFixture]
-	public class GaussianMembershipFunctionTests
+	public class BellMembershipFunctionTests
 	{
 		[SetUp]
 		public void Setup()
@@ -35,13 +35,13 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(50, 20, 50, 1)]
-		[TestCase(50, 20, 10, .135)]
-		[TestCase(50, 20, 90, .135)]
-		public void Gaussian_Fuzzify_Success(double c, double tou, double inputValue, double expectedResult)
+		[TestCase(15, 3, 50, 50, 1)]
+		[TestCase(15, 3, 50, 30, .151)]
+		[TestCase(15, 3, 50, 70, .151)]
+		public void Bell_Fuzzify_Success(double a, double b, double c, double inputValue, double expectedResult)
 		{
 			//Arrange
-			var membershipFunction = new GaussianMembershipFunction("test", c, tou);
+			var membershipFunction = new BellMembershipFunction("test", a, b, c);
 
 			//Act
 			var result = membershipFunction.Fuzzify(inputValue);
@@ -51,10 +51,10 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		public void Gaussian_Min_Success()
+		public void Bell_Min_Success()
 		{
 			//Arrange
-			var membershipFunction = new GaussianMembershipFunction("test", 50, 20);
+			var membershipFunction = new BellMembershipFunction("test", 10, 50, 20);
 
 			//Act
 			var result = membershipFunction.Min();
@@ -64,10 +64,10 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		public void Gaussian_Max_Success()
+		public void Bell_Max_Success()
 		{
 			//Arrange
-			var membershipFunction = new GaussianMembershipFunction("test", 50, 20);
+			var membershipFunction = new BellMembershipFunction("test", 10, 50, 20);
 
 			//Act
 			var result = membershipFunction.Max();
@@ -77,15 +77,17 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(ExpectedException = typeof(ArgumentException), ExpectedMessage = ErrorMessages.TouArgumentIsInvalid)]
-		public void Gaussian_InvalidInput()
+		[TestCase(ExpectedException = typeof(ArgumentException), ExpectedMessage = ErrorMessages.AArgumentIsInvalid)]
+		public void Bell_InvalidInput()
 		{
 			//Arrange
 
 			//Act
-			var membershipFunction = new GaussianMembershipFunction("test", 50, 0);
+			var membershipFunction = new BellMembershipFunction("test", 0, 50, 10);
 
 			//Assert
 		}
+
+
 	}
 }

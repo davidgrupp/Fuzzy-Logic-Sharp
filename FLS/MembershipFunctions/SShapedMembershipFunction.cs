@@ -20,32 +20,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FLS.MembershipFunctions
 {
-	public class GaussianMembershipFunction : FuzzyRuleToken, IMembershipFunction
+	public class SShapedMembershipFunction : FuzzyRuleToken, IMembershipFunction
 	{
-		public GaussianMembershipFunction(String name, double c, double tou)
+		public SShapedMembershipFunction(String name, double a, double b)
 			: base(name, FuzzyRuleTokenType.Function)
 		{
-			if (0 == tou)
-				throw new ArgumentException(ErrorMessages.TouArgumentIsInvalid);
+			if (0 == b)
+				throw new ArgumentException(ErrorMessages.BArgumentIsInvalid);
 
-			_c = c;
-			_tou = tou;
+			_a = a;
+			_b = b;
 		}
 
-		private double _c;
-		private double _tou;
+		private double _a;
+		private double _b;
 
 		#region Public Methods
 
 		public virtual double Fuzzify(double inputValue)
 		{
-			http://www.wolframalpha.com/input/?i=e%5E%28%28-1%2F2%29%28%28x-50%29%2F20%29%5E2%29+for+x+%3D+50+
-			
-			var power = -0.5 * Math.Pow((inputValue - _c) / _tou, 2.0);
-			return Math.Min(1.0, Math.Exp(power));
+			//http://www.wolframalpha.com/input/?i=%28%28tanh%28%28x-50%29%2F10%29%29%2B1%29%2F2+from+-10+to+100
+			var degreeOfMembership = (Math.Tanh((inputValue - _a) / _b) + 1.0) / 2.0;
+
+			return degreeOfMembership;
 		}
 
 		public virtual Double Min()
@@ -55,7 +56,7 @@ namespace FLS.MembershipFunctions
 
 		public virtual Double Max()
 		{
-			return 200;
+			return 100;
 		}
 
 		#endregion

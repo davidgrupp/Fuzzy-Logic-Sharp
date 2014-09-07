@@ -42,13 +42,21 @@ namespace FLS.Tests.MembershipFunctions
 			//Act
 			var trap = collection.AddTrapezoid("trap", 0, 0, 20, 40);
 			var tri = collection.AddTriangle("tri", 20, 40, 60);
+			collection.AddRectangle("rect", 10, 50);
 			collection.AddGaussian("gaus", 50, 20);
+			collection.AddBell("bell", 10, 3, 50);
+			collection.AddSShaped("sshaped", 50, 10);
+			collection.AddZShaped("zshaped", 50, 10);
 			collection.AddComposite("comp", trap, tri, 20);
 
 			//Assert
 			Assert.That(collection.Any(mf => mf is TrapezoidMembershipFunction), Is.True, "Trapezoid");
 			Assert.That(collection.Any(mf => mf is TriangleMembershipFunction), Is.True, "Triangle");
+			Assert.That(collection.Any(mf => mf is RectangleMembershipFunction), Is.True, "Rectangle");
 			Assert.That(collection.Any(mf => mf is GaussianMembershipFunction), Is.True, "Gaussian");
+			Assert.That(collection.Any(mf => mf is BellMembershipFunction), Is.True, "Bell");
+			Assert.That(collection.Any(mf => mf is SShapedMembershipFunction), Is.True, "SShaped");
+			Assert.That(collection.Any(mf => mf is ZShapedMembershipFunction), Is.True, "ZShaped");
 			Assert.That(collection.Any(mf => mf is CompositeMembershipFunction), Is.True, "Composite");
 		}
 

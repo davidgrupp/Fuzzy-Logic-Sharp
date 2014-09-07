@@ -52,12 +52,16 @@
     <Compile Include="Interfaces\IFuzzyEngine.cs" />
     <Compile Include="Interfaces\IFuzzyEngineFactory.cs" />
     <Compile Include="Interfaces\IFuzzyRuleEvaluator.cs" />
+    <Compile Include="MembershipFunctions\BellMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\CompositeMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\GaussianMembershipFunction.cs" />
     <Compile Include="Interfaces\IMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\MembershipFunctionCollection.cs" />
+    <Compile Include="MembershipFunctions\RectangleMembershipFunction.cs" />
+    <Compile Include="MembershipFunctions\SShapedMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\TrapezoidMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\TriangleMembershipFunction.cs" />
+    <Compile Include="MembershipFunctions\ZShapedMembershipFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\Conclusion.cs" />
     <Compile Include="Rules\FuzzyRule.cs" />

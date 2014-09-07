@@ -20,32 +20,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FLS.MembershipFunctions
 {
-	public class GaussianMembershipFunction : FuzzyRuleToken, IMembershipFunction
+	public class BellMembershipFunction : FuzzyRuleToken, IMembershipFunction
 	{
-		public GaussianMembershipFunction(String name, double c, double tou)
+		public BellMembershipFunction(String name, double a, double b, double c)
 			: base(name, FuzzyRuleTokenType.Function)
 		{
-			if (0 == tou)
-				throw new ArgumentException(ErrorMessages.TouArgumentIsInvalid);
-
+			if (0 == a)
+				throw new ArgumentException(ErrorMessages.AArgumentIsInvalid);
+			_a = a;
+			_b = b;
 			_c = c;
-			_tou = tou;
 		}
 
+		private double _a;
+		private double _b;
 		private double _c;
-		private double _tou;
+
 
 		#region Public Methods
 
 		public virtual double Fuzzify(double inputValue)
 		{
-			http://www.wolframalpha.com/input/?i=e%5E%28%28-1%2F2%29%28%28x-50%29%2F20%29%5E2%29+for+x+%3D+50+
-			
-			var power = -0.5 * Math.Pow((inputValue - _c) / _tou, 2.0);
-			return Math.Min(1.0, Math.Exp(power));
+		http://www.wolframalpha.com/input/?i=e%5E%28%28-1%2F2%29%28%28x-50%29%2F20%29%5E2%29+for+x+%3D+50+
+
+			var power = 1 + Math.Pow((inputValue - _c) / _a, 2.0 * _b);
+			return Math.Max(0, Math.Min(1.0, 1.0 / power));
 		}
 
 		public virtual Double Min()
