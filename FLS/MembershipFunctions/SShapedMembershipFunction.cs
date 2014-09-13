@@ -60,12 +60,12 @@ namespace FLS.MembershipFunctions
 
 		public override Double Min()
 		{
-			return 0;
+			return _min;
 		}
 
 		public override Double Max()
 		{
-			return 100;
+			return _max;
 		}
 
 		#endregion
