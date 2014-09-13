@@ -26,7 +26,7 @@ namespace FLS.MembershipFunctions
 	/// <summary>
 	/// A membership function.
 	/// </summary>
-	public class TrapezoidMembershipFunction : FuzzyRuleToken, IMembershipFunction
+	public class TrapezoidMembershipFunction : BaseMembershipFunction
 	{
 		#region Private Properties
 
@@ -45,7 +45,7 @@ namespace FLS.MembershipFunctions
 		/// <param name="c">The mid right x value at 1.</param>
 		/// <param name="d">The right most x value at 1.</param>
 		public TrapezoidMembershipFunction(String name, Double a, Double b, Double c, Double d)
-			: base(name, FuzzyRuleTokenType.Function)
+			: base(name)
 		{
 			_a = a;
 			_b = b;
@@ -56,8 +56,6 @@ namespace FLS.MembershipFunctions
 		#endregion
 
 		#region public Properties
-
-		public Double Modification { get; set; }
 
 		public Double A { get { return _a; } }
 
@@ -76,7 +74,7 @@ namespace FLS.MembershipFunctions
 		/// </summary>
 		/// <param name="inputValue">The crisp value to fuzzify.</param>
 		/// <returns>The degree of membership.</returns>
-		public double Fuzzify(double inputValue)
+		public override Double Fuzzify(Double inputValue)
 		{
 			if (_a <= inputValue && inputValue < _b)
 				return (inputValue - _a) / (_b - _a);
@@ -88,12 +86,12 @@ namespace FLS.MembershipFunctions
 				return 0;
 		}
 
-		public Double Min()
+		public override Double Min()
 		{
 			return _a;
 		}
 
-		public Double Max()
+		public override Double Max()
 		{
 			return _d;
 		}

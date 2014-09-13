@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\IFuzzyEngine.cs" />
     <Compile Include="Interfaces\IFuzzyEngineFactory.cs" />
     <Compile Include="Interfaces\IFuzzyRuleEvaluator.cs" />
+    <Compile Include="MembershipFunctions\BaseMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\BellMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\CompositeMembershipFunction.cs" />
     <Compile Include="MembershipFunctions\GaussianMembershipFunction.cs" />
