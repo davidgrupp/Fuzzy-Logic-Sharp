@@ -14,7 +14,17 @@ This project is looking for more contributors. If you have any interest in helpi
 
 ### Features
 + Implements Center of Gravity and Middle of Maximum Defuzzification.
+    + Center of Gravity (Centroid)
+    + Middle of Maximum
 + Implements a verity of membership functions.
+    + Trapezoid
+    + Triangle
+    + Rectangle
+    + Generalized Bell Shaped
+    + Gaussian
+    + S-Shaped
+    + Z-Shaped
+    + Composite
 + Easy to use syntax for creating system rules.
 + Simple design that allows for user extensibility.
 + Easy installation via [NuGet](https://www.nuget.org/packages/FLS/)
