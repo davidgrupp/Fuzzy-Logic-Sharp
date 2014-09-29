@@ -54,18 +54,4 @@ var result = fuzzyEngine.Defuzzify(new { water = 60 });
 3. Expand rule syntax and add additional operators.
 
 
-### Terminology
-
-| Term                	| Description                                                    	| Alternatives        	| Example                                                                 	|
-|---------------------	|----------------------------------------------------------------	|---------------------	|-------------------------------------------------------------------------	|
-| Rule                	| A logic statement                                              	| Proposition         	| **If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high))**         	|
-| Premise             	| The first half of a logical statement                          	| Antecedent          	| If(**water.Is(cold).Or(water.Is(warm))**).Then(power.Is(high))         	|
-| Conclusion          	| The second half of a logical statement                         	| Consequent          	| If(water.Is(cold).Or(water.Is(warm))).Then(**power.Is(high)**)         	|
-| Condition           	| The premise consists of one or more conditions that are tested 	|                     	| If(**water.Is(cold)**.Or(**water.Is(warm))**).Then(**power.Is(high)**) 	|
-| Linguistic Variable 	| A variable expressed linguistically                            	| Variable            	| If(**water**.Is(cold).Or(**water**.Is(warm))).Then(**power**.Is(high)) 	|
-| Membership Function 	| Sets whose elements have degrees of membership                 	| Membership Set, Set 	| If(water.Is(**cold**).Or(water.Is(**warm**))).Then(power.Is(**high**)) 	|
-| Operator            	| Relates a variable to a membership function                    	|                     	| If(water.**Is**(cold).Or(water.**Is**(warm))).Then(power.**Is**(high)) 	|
-| Conjunction         	| Joins conditions together with 'And' or 'Or'                  	|                     	| If(water.Is(cold).**Or**(water.Is(warm))).Then(power.Is(high))         	|
-
-
 
