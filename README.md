@@ -49,14 +49,9 @@ var result = fuzzyEngine.Defuzzify(new { water = 60 });
 ```
 
 ### Road map
-1. ~~Improve interface for submitting variable input values~~
-2. ~~Improve creating variables and membership functions and add more variety of membership functions.~~
-3. ~~Finialize the interface for creating rules.~~
-4. ~~Finialize intial project goals.~~
-5. ~~Release inital build via nuget.~~
-4. FCL Support for saving and loading Fuzzy Systems.
-5. Additional defuzzification method implementations.
-6. Expand rule syntax and add additional operators.
+1. FCL Support for saving and loading Fuzzy Systems.
+2. Additional defuzzification method implementations.
+3. Expand rule syntax and add additional operators.
 
 
 ### Terminology
