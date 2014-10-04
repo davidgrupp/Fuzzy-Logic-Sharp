@@ -45,9 +45,9 @@ namespace FLS.MembershipFunctions
 
 		public virtual double Fuzzify(double inputValue)
 		{
-		http://www.wolframalpha.com/input/?i=e%5E%28%28-1%2F2%29%28%28x-50%29%2F20%29%5E2%29+for+x+%3D+50+
+			//http://www.wolframalpha.com/input/?i=1%2F%281%2B%28Abs%28%28x-50%29%2F15%29%29%5E%282*3%29%29+from+-20+to+100
 
-			var power = 1 + Math.Pow((inputValue - _c) / _a, 2.0 * _b);
+			var power = 1 + Math.Abs(Math.Pow((inputValue - _c) / _a, 2.0 * _b));
 			return Math.Max(0, Math.Min(1.0, 1.0 / power));
 		}
 

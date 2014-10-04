@@ -31,7 +31,7 @@ namespace FLS
 		private TrapezoidCoGDefuzzification _trapezoidCoGDefuzzification = new TrapezoidCoGDefuzzification();
 		public Double Defuzzify(List<IMembershipFunction> functions)
 		{
-			//if all the membership functions are trapezoids or triangles then we can use a faster defuzzification method
+			//if all the membership functions are trapezoids, triangles, or rectangles then we can use a faster defuzzification method
 			if (functions.All(f => f is TrapezoidMembershipFunction))
 				return _trapezoidCoGDefuzzification.Defuzzify(functions);
 
