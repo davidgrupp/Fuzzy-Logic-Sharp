@@ -24,26 +24,35 @@ using System.Threading.Tasks;
 
 namespace FLS.MembershipFunctions
 {
-	public class BellMembershipFunction : FuzzyRuleToken, IMembershipFunction
+	public class BellMembershipFunction : BaseMembershipFunction
 	{
-		public BellMembershipFunction(String name, double a, double b, double c)
-			: base(name, FuzzyRuleTokenType.Function)
+		public BellMembershipFunction(String name, Double a, Double b, Double c, Double min, Double max)
+			: base(name)
 		{
 			if (0 == a)
 				throw new ArgumentException(ErrorMessages.AArgumentIsInvalid);
 			_a = a;
 			_b = b;
 			_c = c;
+			_min = min;
+			_max = max;
 		}
 
-		private double _a;
-		private double _b;
-		private double _c;
+		public BellMembershipFunction(String name, Double a, Double b, Double c)
+			: this(name, a, b, c, 0, 200)
+		{
+		}
+
+		private Double _min;
+		private Double _max;
+		private Double _a;
+		private Double _b;
+		private Double _c;
 
 
 		#region Public Methods
 
-		public virtual double Fuzzify(double inputValue)
+		public override Double Fuzzify(Double inputValue)
 		{
 			//http://www.wolframalpha.com/input/?i=1%2F%281%2B%28Abs%28%28x-50%29%2F15%29%29%5E%282*3%29%29+from+-20+to+100
 
@@ -51,23 +60,19 @@ namespace FLS.MembershipFunctions
 			return Math.Max(0, Math.Min(1.0, 1.0 / power));
 		}
 
-		public virtual Double Min()
+		public override Double Min()
 		{
-			return 0;
+			return _min;
 		}
 
-		public virtual Double Max()
+		public override Double Max()
 		{
-			return 200;
+			return _max;
 		}
 
 		#endregion
 
-		#region public Properties
 
-		public Double Modification { get; set; }
-
-		#endregion
 
 
 	}

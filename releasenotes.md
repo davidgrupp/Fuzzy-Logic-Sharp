@@ -1,5 +1,17 @@
 # FLS - Fuzzy Logic Sharp Release Notes
 
+### 1.1.4
+Features
++ Added new membership function types.
+    + Generalized Bell Shapped
+    + S-Shaped
+    + Z-Shaped
+    + Rectangle
+
+Bug Fixes
++ Fixed setting the same membership function modifications if used in multiple rules.
++ Added additional membership function min &  max overloads to be able to set min & max values for membership functions.
+
 ### 1.1.2
 Features
 + Added Trapeziod specific CoG defuzzification method for faster defuzzification of trapezoids and triangles

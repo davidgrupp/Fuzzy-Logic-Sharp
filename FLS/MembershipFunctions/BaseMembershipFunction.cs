@@ -19,48 +19,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FLS.MembershipFunctions
 {
-	public class CompositeMembershipFunction : BaseMembershipFunction
+	public abstract class BaseMembershipFunction : FuzzyRuleToken, IMembershipFunction
 	{
-		public CompositeMembershipFunction(String name, IMembershipFunction leftFunction, IMembershipFunction rightFunction, double midPoint)
-			: base(name)
+		#region ctors
+
+		public BaseMembershipFunction(String name)
+			: base(name, FuzzyRuleTokenType.Function)
 		{
-			_leftFunction = leftFunction;
-			_rightFunction = rightFunction;
-			_midPoint = midPoint;
-		}
 
-		private IMembershipFunction _leftFunction;
-		private IMembershipFunction _rightFunction;
-		private double _midPoint;
-
-		#region Public Methods
-
-		public override Double Fuzzify(Double inputValue)
-		{
-			if (inputValue <= _midPoint)
-			{
-				return _leftFunction.Fuzzify(inputValue);
-			}
-			else
-			{
-				return _rightFunction.Fuzzify(inputValue);
-			}
-		}
-
-		public override Double Min()
-		{
-			return _leftFunction.Min();
-		}
-
-		public override Double Max()
-		{
-			return _rightFunction.Max();
 		}
 
 		#endregion
 
+
+		#region Private Properties
+
+		private Double _modification = 0;
+
+		#endregion
+
+		#region public Properties
+
+		public Double Modification
+		{
+			get
+			{
+				return _modification;
+			}
+			set
+			{
+				if (value > _modification)
+					_modification = value;
+			}
+		}
+
+		#endregion
+
+		#region Abstract Methods
+
+		public abstract Double Fuzzify(Double inputValue);
+
+		public abstract Double Min();
+
+		public abstract Double Max();
+
+		#endregion
 	}
 }

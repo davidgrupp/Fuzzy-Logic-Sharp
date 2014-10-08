@@ -24,24 +24,33 @@ using System.Threading.Tasks;
 
 namespace FLS.MembershipFunctions
 {
-	public class SShapedMembershipFunction : FuzzyRuleToken, IMembershipFunction
+	public class SShapedMembershipFunction : BaseMembershipFunction
 	{
-		public SShapedMembershipFunction(String name, double a, double b)
-			: base(name, FuzzyRuleTokenType.Function)
+		public SShapedMembershipFunction(String name, Double a, Double b, Double min, Double max)
+			: base(name)
 		{
 			if (0 == b)
 				throw new ArgumentException(ErrorMessages.BArgumentIsInvalid);
 
 			_a = a;
 			_b = b;
+			_min = min;
+			_max = max;
 		}
 
-		private double _a;
-		private double _b;
+		public SShapedMembershipFunction(String name, Double a, Double b)
+			: this(name, a, b, 0, 100)
+		{
+		}
+
+		private Double _a;
+		private Double _b;
+		private Double _min;
+		private Double _max;
 
 		#region Public Methods
 
-		public virtual double Fuzzify(double inputValue)
+		public override Double Fuzzify(Double inputValue)
 		{
 			//http://www.wolframalpha.com/input/?i=%28%28tanh%28%28x-50%29%2F10%29%29%2B1%29%2F2+from+-10+to+100
 			var degreeOfMembership = (Math.Tanh((inputValue - _a) / _b) + 1.0) / 2.0;
@@ -49,21 +58,15 @@ namespace FLS.MembershipFunctions
 			return degreeOfMembership;
 		}
 
-		public virtual Double Min()
+		public override Double Min()
 		{
-			return 0;
+			return _min;
 		}
 
-		public virtual Double Max()
+		public override Double Max()
 		{
-			return 100;
+			return _max;
 		}
-
-		#endregion
-
-		#region public Properties
-
-		public Double Modification { get; set; }
 
 		#endregion
 

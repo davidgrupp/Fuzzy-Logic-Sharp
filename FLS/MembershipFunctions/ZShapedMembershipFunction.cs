@@ -31,5 +31,10 @@ namespace FLS.MembershipFunctions
 
 		}
 
+		public ZShapedMembershipFunction(String name, Double a, Double b, Double min, Double max)
+			: base(name, a, -b, min, max)
+		{
+
+		}
 	}
 }
