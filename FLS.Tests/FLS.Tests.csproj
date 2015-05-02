@@ -55,6 +55,7 @@
     <Compile Include="InferenceEngines\MoMFuzzyEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\FuzzyRuleEvaluatorTests.cs" />
+    <Compile Include="Rules\RuleFactoryTests.cs" />
     <Compile Include="TestUtilities.cs" />
     <Compile Include="MembershipFunctions\TrapezoidMembershipFunctionTests.cs" />
     <Compile Include="Examples\UsageExampleTests.cs" />

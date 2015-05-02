@@ -27,34 +27,40 @@ namespace FLS
 	{
 		public static FuzzyRule If(this FuzzyRuleCollection value, List<FuzzyRuleCondition> conditions)
 		{
-			var rule = new FuzzyRule();
-
+			var rule = RuleFactory.If(conditions);
 			value.Add(rule);
-
-			return rule.If(conditions);
+			return rule;
 		}
 
 		public static FuzzyRule If(this FuzzyRuleCollection value, FuzzyRuleCondition condition)
 		{
-			var rule = new FuzzyRule();
-
+			var rule = RuleFactory.If(condition);
 			value.Add(rule);
-
-			return rule.If(condition);
+			return rule;
 		}
 
 		public static FuzzyRule If(this FuzzyRule value, List<FuzzyRuleCondition> conditions)
 		{
-			value.Premise = new Premise(conditions);
+			if (null == value.Premise)
+				value.Premise = new Premise(conditions);
 
 			return value;
 		}
 
 		public static FuzzyRule If(this FuzzyRule value, FuzzyRuleCondition condition)
 		{
-			value.Premise = new Premise(condition);
+			if (null == value.Premise)
+				value.Premise = new Premise(condition);
 
 			return value;
+		}
+
+		public static void Add(this FuzzyRuleCollection value, params FuzzyRule[] rules)
+		{
+			foreach (var rule in rules)
+			{
+				value.Add(rule);
+			}
 		}
 
 		public static FuzzyRuleCondition Is(this LinguisticVariable value, IMembershipFunction function)

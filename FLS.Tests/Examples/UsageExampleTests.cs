@@ -49,8 +49,9 @@ namespace FLS.Tests
 			
 			IFuzzyEngine fuzzyEngine = new FuzzyEngineFactory().Default();
 
-			fuzzyEngine.Rules.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
-			fuzzyEngine.Rules.If(water.Is(hot)).Then(power.Is(low));
+			var rule1 = RuleFactory.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
+			var rule2 = RuleFactory.If(water.Is(hot)).Then(power.Is(low));
+			fuzzyEngine.Rules.Add(rule1, rule2);
 
 			//Act
 			var result = fuzzyEngine.Defuzzify(new { water = 60 });
