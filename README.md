@@ -16,7 +16,7 @@ This project is looking for more contributors. If you have any interest in helpi
 + Implements Center of Gravity and Middle of Maximum Defuzzification.
     + Center of Gravity (Centroid)
     + Middle of Maximum
-+ Implements a verity of membership functions.
++ Implements a verity of [membership functions](https://github.com/davidgrupp/FLS/wiki/Membership-Functions).
     + Trapezoid
     + Triangle
     + Rectangle
