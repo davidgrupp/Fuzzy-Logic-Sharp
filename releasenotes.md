@@ -1,5 +1,10 @@
 # FLS - Fuzzy Logic Sharp Release Notes
 
+### 1.1.5
+Features
++ Added new way to create rules.
+
+
 ### 1.1.4
 Features
 + Added new membership function types.

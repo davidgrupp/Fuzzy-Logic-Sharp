@@ -6,11 +6,11 @@
     <authors>$author$</authors>
     <owners>David Grupp</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
-    <projectUrl>https://github.com/davidgrupp/FLS</projectUrl>
+    <projectUrl>https://github.com/davidgrupp/Fuzzy-Logic-Sharp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes><![CDATA[
-            For full release notes see https://github.com/davidgrupp/FLS/blob/master/releasenotes.md
+            For full release notes see https://github.com/davidgrupp/Fuzzy-Logic-Sharp/blob/master/releasenotes.md
             ]]></releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>FUZZY LOGIC SHARP</tags>
