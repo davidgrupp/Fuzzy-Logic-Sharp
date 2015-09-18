@@ -42,8 +42,9 @@ var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
 
 IFuzzyEngine fuzzyEngine = new FuzzyEngineFactory().Default();
 
-fuzzyEngine.Rules.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
-fuzzyEngine.Rules.If(water.Is(hot)).Then(power.Is(low));
+var rule1 = Rule.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
+var rule2 = Rule.If(water.Is(hot)).Then(power.Is(low));
+fuzzyEngine.Rules.Add(rule1, rule2);
 
 var result = fuzzyEngine.Defuzzify(new { water = 60 });
 ```
