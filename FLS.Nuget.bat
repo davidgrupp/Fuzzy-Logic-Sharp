@@ -1,3 +1,4 @@
-c:\users\david\Downloads\nuget pack "FLS\FLS.csproj" -Prop Configuration=Release
+cd <Folder with FLS.nuspec>
+<Downloads>\nuget pack "FLS\FLS.csproj" -Prop Configuration=Release
 pause
-c:\users\david\Downloads\nuget push FLS.1.1.5.0.nupkg
+<Downloads>\nuget push FLS.1.1.5.0.nupkg
