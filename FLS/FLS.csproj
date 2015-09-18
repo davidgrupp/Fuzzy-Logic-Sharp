@@ -75,7 +75,7 @@
     <Compile Include="Rules\FuzzyRuleTokenType.cs" />
     <Compile Include="Interfaces\IFuzzyRuleToken.cs" />
     <Compile Include="Rules\Premise.cs" />
-    <Compile Include="Rules\RuleFactory.cs" />
+    <Compile Include="Rules\Rule.cs" />
     <Compile Include="Variables\LinguisticVariable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

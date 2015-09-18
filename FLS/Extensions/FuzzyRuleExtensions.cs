@@ -27,14 +27,14 @@ namespace FLS
 	{
 		public static FuzzyRule If(this FuzzyRuleCollection value, List<FuzzyRuleCondition> conditions)
 		{
-			var rule = RuleFactory.If(conditions);
+			var rule = Rule.If(conditions);
 			value.Add(rule);
 			return rule;
 		}
 
 		public static FuzzyRule If(this FuzzyRuleCollection value, FuzzyRuleCondition condition)
 		{
-			var rule = RuleFactory.If(condition);
+			var rule = Rule.If(condition);
 			value.Add(rule);
 			return rule;
 		}

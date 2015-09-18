@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace FLS.Rules
 {
-	public static class RuleFactory
+	public static class Rule
 	{
 		public static FuzzyRule If(List<FuzzyRuleCondition> conditions)
 		{

@@ -47,12 +47,12 @@ namespace FLS.Tests.Rules
 			var high = power.MembershipFunctions.AddTrapezoid("High", 25, 50, 50, 75);
 
 			//Act
-			var rule1 = RuleFactory.If(water.Is(cold)).Then(power.Is(high)); //valid
-			var rule2 = RuleFactory.If(water.IsNot(cold)).Then(power.Is(high)); //valid
-			var rule3 = RuleFactory.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high)); //valid
-			var rule4 = RuleFactory.If(water.Is(cold).Or(water.Is(warm)).And(water.Is(hot))).Then(power.Is(high)); //valid
-			var rule5 = RuleFactory.If(water.Is(cold).And(water.Is(warm)).And(water.Is(hot))).Then(power.Is(high)); //valid
-			var rule6 = RuleFactory.If(water.Is(cold).Or(water.Is(warm)).Or(water.Is(hot))).Then(power.Is(high)); //valid
+			var rule1 = Rule.If(water.Is(cold)).Then(power.Is(high)); //valid
+			var rule2 = Rule.If(water.IsNot(cold)).Then(power.Is(high)); //valid
+			var rule3 = Rule.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high)); //valid
+			var rule4 = Rule.If(water.Is(cold).Or(water.Is(warm)).And(water.Is(hot))).Then(power.Is(high)); //valid
+			var rule5 = Rule.If(water.Is(cold).And(water.Is(warm)).And(water.Is(hot))).Then(power.Is(high)); //valid
+			var rule6 = Rule.If(water.Is(cold).Or(water.Is(warm)).Or(water.Is(hot))).Then(power.Is(high)); //valid
 
 			var result1 = rule1.IsValid();
 			var result2 = rule2.IsValid();
