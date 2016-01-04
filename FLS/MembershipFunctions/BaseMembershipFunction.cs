@@ -38,22 +38,35 @@ namespace FLS.MembershipFunctions
 
 		#region Private Properties
 
-		private Double _modification = 0;
+		private Double _premiseModifier = 0;
 
 		#endregion
 
 		#region public Properties
 
+		public Double PremiseModifier
+		{
+			get
+			{
+				return _premiseModifier;
+			}
+			set
+			{
+				if (value > _premiseModifier)
+					_premiseModifier = value;
+			}
+		}
+
+		[Obsolete("Use PremiseModifier instead. Modification passes through to PremiseModifier.")]
 		public Double Modification
 		{
 			get
 			{
-				return _modification;
+				return PremiseModifier;
 			}
 			set
 			{
-				if (value > _modification)
-					_modification = value;
+				PremiseModifier = value;
 			}
 		}
 

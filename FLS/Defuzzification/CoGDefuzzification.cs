@@ -34,7 +34,12 @@ namespace FLS
 			//if all the membership functions are trapezoids, triangles, or rectangles then we can use a faster defuzzification method
 			if (functions.All(f => f is TrapezoidMembershipFunction))
 				return _trapezoidCoGDefuzzification.Defuzzify(functions);
+			else
+				return _Defuzzify(functions);
+		}
 
+		public Double _Defuzzify(List<IMembershipFunction> functions)
+		{
 			var minX = functions.Select(f => f.Min()).Min();
 			var maxX = functions.Select(f => f.Max()).Max();
 
@@ -44,7 +49,7 @@ namespace FLS
 
 			for (var i = minX; i <= maxX; i += 1)
 			{
-				var maxAtX = functions.Select(f => Math.Min(f.Modification, f.Fuzzify(i))).Max();
+				var maxAtX = functions.Select(f => f.PremiseModifier * f.Fuzzify(i)).Max();
 				sum += maxAtX;
 				sumx += i * maxAtX;
 			}

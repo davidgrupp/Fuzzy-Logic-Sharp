@@ -25,6 +25,7 @@ namespace FLS.MembershipFunctions
 	public interface IMembershipFunction : IFuzzyRuleToken
 	{
 		Double Fuzzify(Double inputValue);
+		Double PremiseModifier { get; set; }
 		Double Modification { get; set; }
 		Double Min();
 		Double Max();

@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Defuzzification\CoGDefuzzificationTest.cs" />
+    <Compile Include="Defuzzification\TrapezoidCoGDefuzzificationTests.cs" />
     <Compile Include="Extensions\IEnumerableExtensionsTests.cs" />
     <Compile Include="InferenceEngines\CoGFuzzyEngineTests.cs" />
     <Compile Include="InferenceEngines\FuzzyEngineFactoryTests.cs" />

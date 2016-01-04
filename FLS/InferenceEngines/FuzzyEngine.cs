@@ -80,7 +80,7 @@ namespace FLS
 				throw new Exception(ErrorMessages.RulesAreInvalid);
 
 			//reset membership functions
-			_rules.ForEach(r => r.Conclusion.MembershipFunction.Modification = 0);
+			_rules.ForEach(r => r.Conclusion.MembershipFunction.PremiseModifier = 0);
 
 			SetVariableInputValues(inputValues);
 
@@ -93,7 +93,7 @@ namespace FLS
 				var ruleConclusionVar = fuzzyRule.Conclusion.Variable;
 				var membershipFunction = ruleConclusionVar.MembershipFunctions.First(mf => mf.Name == fuzzyRule.Conclusion.MembershipFunction.Name);
 
-				membershipFunction.Modification = premiseValue;
+				membershipFunction.PremiseModifier = premiseValue;
 			}
 
 			return _defuzzification.Defuzzify(conclustionMembershipFunctions);

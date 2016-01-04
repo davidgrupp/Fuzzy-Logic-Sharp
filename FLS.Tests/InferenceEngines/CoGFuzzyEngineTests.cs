@@ -141,7 +141,7 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(60, 74)]
+		[TestCase(60, 71)]
 		public void CoG_Defuzzify_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange

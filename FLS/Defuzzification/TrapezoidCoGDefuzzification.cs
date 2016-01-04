@@ -41,18 +41,18 @@ namespace FLS
 
 			foreach (var function in functions.Select(f => f as TrapezoidMembershipFunction))
 			{
-				numerator += TrapezoidCentroid(function) * TrapezoidArea(function);
-				denominator += TrapezoidArea(function);
+				var trapCent = TrapezoidCentroid(function);
+				var trapArea = TrapezoidArea(function, trapCent);
+				numerator += trapCent * trapArea;
+				denominator += trapArea;
 			}
 
 			return (0 != denominator) ? numerator / denominator : 0;
 		}
 
-		private Double TrapezoidArea(TrapezoidMembershipFunction f)
+		private Double TrapezoidArea(TrapezoidMembershipFunction f, Double centroid)
 		{
-			var centroid = TrapezoidCentroid(f);
-
-			return (f.Modification * (2 * f.C - 2 * f.A - f.Modification * (centroid - f.A))) / 2; 
+			return (f.PremiseModifier * (2 * f.C - 2 * f.A - f.PremiseModifier * (centroid - f.A))) / 2; 
 		}
 
 		private Double TrapezoidCentroid(TrapezoidMembershipFunction f)

@@ -1,6 +1,6 @@
 ﻿#region License
 //   FLS - Fuzzy Logic Sharp for .NET
-//   Copyright 2014 David Grupp
+//   Copyright 2015 David Grupp
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -14,44 +14,37 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License. 
 #endregion
-using FLS.MembershipFunctions;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FLS
+namespace FLS.Tests.Defuzzification
 {
-	public class MoMDefuzzification : IDefuzzification
+	[TestFixture]
+	public class TrapezoidCoGDefuzzificationTests
 	{
-		public Double Defuzzify(List<IMembershipFunction> functions)
+		[Test]
+		public void CoG_Trapezoid_Defuzzify()
 		{
-			var minX = functions.Select(f => f.Min()).Min();
-			var maxX = functions.Select(f => f.Max()).Max();
+			//Arrange
+			LinguisticVariable temp = new LinguisticVariable("Tempurature");
+			var cold = temp.MembershipFunctions.AddTrapezoid("Cold", 0, 0, 20, 40);
+			var warm = temp.MembershipFunctions.AddTriangle("Warm", 30, 50, 70);
+			var hot = temp.MembershipFunctions.AddTrapezoid("Hot", 50, 80, 100, 100);
+			cold.PremiseModifier = 0.5;
+			warm.PremiseModifier = 0.5;
+			hot.PremiseModifier = 0.5;
 
-			var max = 0.0;
-			var startMax = 0.0;
-			var len = 0.0;
+			var defuzz = new TrapezoidCoGDefuzzification();
 
-			for (var i = minX; i <= maxX; i += 1)
-			{
-				var maxFuzVal = functions.Select(f=>f.PremiseModifier * f.Fuzzify(i)).Max();
-				if (max < maxFuzVal)
-				{
-					max = maxFuzVal;
-					startMax = i;
-					len = 0.0;
-				}
-				else if (max == maxFuzVal && 0 < maxFuzVal)
-				{
-					len++;
-				}
-			}
+			//Act
+			var result = defuzz.Defuzzify(temp.MembershipFunctions.ToList());
 
-			var mid = startMax + (len / 2.0);
-
-			return mid;
+			//Assert
+			Assert.That(result, Is.EqualTo(1));
 		}
 	}
 }
