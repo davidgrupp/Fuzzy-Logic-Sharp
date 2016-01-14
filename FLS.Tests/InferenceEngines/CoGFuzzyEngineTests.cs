@@ -35,7 +35,7 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(60, 39)]
+		[TestCase(60, 40)]
 		public void CoG_Trap_Defuzzify_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange
@@ -62,7 +62,7 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(60, 80)]
+		[TestCase(60, 73)]
 		public void CoG_Trap_Defuzzify2_Success(Int32 waterInputValue, Double expectedValue)
 		{
 			//Arrange
