@@ -52,7 +52,7 @@ namespace FLS
 
 		private Double TrapezoidArea(TrapezoidMembershipFunction f, Double centroid)
 		{
-			return (f.PremiseModifier * (2 * f.C - 2 * f.A - f.PremiseModifier * (centroid - f.A))) / 2; 
+			return ((f.C - f.B) + (f.D - f.A)) * f.PremiseModifier;
 		}
 
 		private Double TrapezoidCentroid(TrapezoidMembershipFunction f)

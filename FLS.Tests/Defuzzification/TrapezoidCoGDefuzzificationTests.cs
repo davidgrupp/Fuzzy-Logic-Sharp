@@ -31,9 +31,9 @@ namespace FLS.Tests.Defuzzification
 		{
 			//Arrange
 			LinguisticVariable temp = new LinguisticVariable("Tempurature");
-			var cold = temp.MembershipFunctions.AddTrapezoid("Cold", 0, 0, 20, 40);
+			var cold = temp.MembershipFunctions.AddTrapezoid("Cold", 0, 0, 30, 50);
 			var warm = temp.MembershipFunctions.AddTriangle("Warm", 30, 50, 70);
-			var hot = temp.MembershipFunctions.AddTrapezoid("Hot", 50, 80, 100, 100);
+			var hot = temp.MembershipFunctions.AddTrapezoid("Hot", 70, 80, 90, 90);
 			cold.PremiseModifier = 0.5;
 			warm.PremiseModifier = 0.5;
 			hot.PremiseModifier = 0.5;
@@ -44,7 +44,7 @@ namespace FLS.Tests.Defuzzification
 			var result = defuzz.Defuzzify(temp.MembershipFunctions.ToList());
 
 			//Assert
-			Assert.That(result, Is.EqualTo(1));
+			Assert.That(Math.Floor(result), Is.EqualTo(40));
 		}
 	}
 }
