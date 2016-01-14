@@ -1,5 +1,9 @@
 # FLS - Fuzzy Logic Sharp Release Notes
 
+### 1.1.6
+Bug Fixes
++ Fixed issue with CoG defuzzification.
+
 ### 1.1.5
 Features
 + Added new way to create rules.
