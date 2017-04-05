@@ -31,12 +31,12 @@ This project is looking for more contributors. If you have any interest in helpi
 
 ### Usage
 ```csharp
-LinguisticVariable water = new LinguisticVariable("Water");
+var water = new LinguisticVariable("Water");
 var cold = water.MembershipFunctions.AddTrapezoid("Cold", 0, 0, 20, 40);
 var warm = water.MembershipFunctions.AddTriangle("Warm", 30, 50, 70);
 var hot = water.MembershipFunctions.AddTrapezoid("Hot", 50, 80, 100, 100);
 
-LinguisticVariable power = new LinguisticVariable("Power");
+var power = new LinguisticVariable("Power");
 var low = power.MembershipFunctions.AddTriangle("Low", 0, 25, 50);
 var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
 
