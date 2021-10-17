@@ -12,16 +12,12 @@
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
-//   limitations under the License. 
+//   limitations under the License.
 #endregion
 using FLS.Constants;
 using FLS.MembershipFunctions;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FLS.Tests.MembershipFunctions
 {
@@ -77,17 +73,15 @@ namespace FLS.Tests.MembershipFunctions
 		}
 
 		[Test]
-		[TestCase(ExpectedException = typeof(ArgumentException), ExpectedMessage = ErrorMessages.AArgumentIsInvalid)]
 		public void Bell_InvalidInput()
 		{
 			//Arrange
 
 			//Act
-			var membershipFunction = new BellMembershipFunction("test", 0, 50, 10);
+			var membershipFunction = new TestDelegate(() => new BellMembershipFunction("test", 0, 50, 10));
 
 			//Assert
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentException)), membershipFunction, ErrorMessages.AArgumentIsInvalid);
 		}
-
-
 	}
 }

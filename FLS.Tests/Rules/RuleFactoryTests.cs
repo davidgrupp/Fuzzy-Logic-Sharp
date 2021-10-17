@@ -12,15 +12,10 @@
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
-//   limitations under the License. 
+//   limitations under the License.
 #endregion
 using FLS.Rules;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FLS.Tests.Rules
 {
@@ -58,8 +53,8 @@ namespace FLS.Tests.Rules
 			var result2 = rule2.IsValid();
 			var result3 = rule3.IsValid();
 			var result4 = rule4.IsValid();
-			var result5 = rule3.IsValid();
-			var result6 = rule4.IsValid();
+			var result5 = rule5.IsValid();
+			var result6 = rule6.IsValid();
 
 			//Assert
 			Assert.That(result1, Is.True, "result1");

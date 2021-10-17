@@ -1,13 +1,13 @@
 ﻿#region License and Terms
 // MoreLINQ - Extensions to LINQ to Objects
 // Copyright (c) 2008 Jonathan Skeet. All rights reserved.
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using FLS;
 
 namespace MoreLinq.Test
@@ -37,19 +36,19 @@ namespace MoreLinq.Test
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentNullException))]
 		public void DistinctByNullSequence()
 		{
 			string[] source = null;
-			source.DistinctBy(x => x.Length);
+			var result = new TestDelegate(() => source.DistinctBy(x => x.Length));
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentNullException)), result);
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentNullException))]
 		public void DistinctByNullKeySelector()
 		{
-			string[] source = { };
-			source.DistinctBy((Func<string, string>)null);
+			string[] source = Array.Empty<string>();
+			var result = new TestDelegate(() => source.DistinctBy((Func<string, string>)null));
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentNullException)), result);
 		}
 
 		[Test]
@@ -61,19 +60,19 @@ namespace MoreLinq.Test
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentNullException))]
 		public void DistinctByNullSequenceWithComparer()
 		{
 			string[] source = null;
-			source.DistinctBy(x => x, StringComparer.Ordinal);
+			var result = new TestDelegate(() => source.DistinctBy(x => x, StringComparer.Ordinal));
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentNullException)), result);
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentNullException))]
 		public void DistinctByNullKeySelectorWithComparer()
 		{
-			string[] source = { };
-			source.DistinctBy(null, StringComparer.Ordinal);
+			string[] source = Array.Empty<string>();
+			var result = new TestDelegate(() => source.DistinctBy(null, StringComparer.Ordinal));
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentNullException)), result);
 		}
 
 		[Test]
@@ -94,19 +93,19 @@ namespace MoreLinq.Test
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentNullException))]
 		public void ForEach_NullAction_Success()
 		{
-			string[] source = { };
-			source.ForEach(null);
+			string[] source = Array.Empty<string>();
+			var result = new TestDelegate(() => source.ForEach(null));
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentNullException)), result);
 		}
 
 		[Test]
-		[ExpectedException(typeof(ArgumentNullException))]
 		public void ForEach_NullSource_Success()
 		{
 			string[] source = null;
-			source.ForEach(word => word.ToLower());
+			var result = new TestDelegate(() => source.ForEach(word => word.ToLower()));
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentNullException)), result);
 		}
 	}
 
