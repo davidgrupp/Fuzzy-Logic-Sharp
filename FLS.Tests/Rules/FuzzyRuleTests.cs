@@ -148,8 +148,8 @@ namespace FLS.Tests.Rules
 			var result2 = rule2.IsValid();
 			var result3 = rule3.IsValid();
 			var result4 = rule4.IsValid();
-			var result5 = rule3.IsValid();
-			var result6 = rule4.IsValid();
+			var result5 = rule5.IsValid();
+			var result6 = rule6.IsValid();
 
 			//Assert
 			Assert.That(result1, Is.True, "result1");
