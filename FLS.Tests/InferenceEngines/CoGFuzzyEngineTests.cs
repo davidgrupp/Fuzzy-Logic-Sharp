@@ -12,17 +12,12 @@
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
-//   limitations under the License. 
+//   limitations under the License.
 #endregion
+
 using FLS.Constants;
-using FLS.Rules;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FLS.Tests
 {
@@ -91,7 +86,6 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[ExpectedException(ExpectedException = typeof(ArgumentException), ExpectedMessage = ErrorMessages.AllMembershipFunctionsMustBeTrapezoid)]
 		public void CoG_Trap_Defuzzify_WrongType()
 		{
 			//Arrange
@@ -110,9 +104,10 @@ namespace FLS.Tests
 			fuzzyEngine.Rules.If(water.Is(hot)).Then(power.Is(low));
 
 			//Act
-			var result = fuzzyEngine.Defuzzify(new { water = 60 });
+			var result = new TestDelegate(() => fuzzyEngine.Defuzzify(new { water = 60 }));
 
 			//Assert
+			Assert.Throws(Is.InstanceOf(typeof(ApplicationException)), result, ErrorMessages.AllMembershipFunctionsMustBeTrapezoid);
 		}
 
 		[Test]

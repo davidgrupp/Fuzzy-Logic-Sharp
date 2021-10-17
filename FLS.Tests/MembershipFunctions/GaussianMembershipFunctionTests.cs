@@ -12,16 +12,12 @@
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
-//   limitations under the License. 
+//   limitations under the License.
 #endregion
 using FLS.Constants;
 using FLS.MembershipFunctions;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FLS.Tests
 {
@@ -77,15 +73,15 @@ namespace FLS.Tests
 		}
 
 		[Test]
-		[TestCase(ExpectedException = typeof(ArgumentException), ExpectedMessage = ErrorMessages.TouArgumentIsInvalid)]
 		public void Gaussian_InvalidInput()
 		{
 			//Arrange
 
 			//Act
-			var membershipFunction = new GaussianMembershipFunction("test", 50, 0);
+			var membershipFunction = new TestDelegate(() => new GaussianMembershipFunction("test", 50, 0));
 
 			//Assert
+			Assert.Throws(Is.InstanceOf(typeof(ArgumentException)), membershipFunction, ErrorMessages.TouArgumentIsInvalid);
 		}
 	}
 }

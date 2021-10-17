@@ -12,15 +12,10 @@
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
-//   limitations under the License. 
+//   limitations under the License.
 #endregion
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FLS;
 using FLS.Rules;
 
 namespace FLS.Tests
@@ -46,7 +41,7 @@ namespace FLS.Tests
 			LinguisticVariable power = new LinguisticVariable("Power");
 			var low = power.MembershipFunctions.AddTriangle("Low", 0, 25, 50);
 			var high = power.MembershipFunctions.AddTriangle("High", 25, 50, 75);
-			
+
 			IFuzzyEngine fuzzyEngine = new FuzzyEngineFactory().Default();
 
 			var rule1 = Rule.If(water.Is(cold).Or(water.Is(warm))).Then(power.Is(high));
@@ -62,9 +57,5 @@ namespace FLS.Tests
 			//Extra
 			System.Diagnostics.Debug.WriteLine(result);
 		}
-
-
-
-
 	}
 }

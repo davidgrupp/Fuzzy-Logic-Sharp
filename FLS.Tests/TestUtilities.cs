@@ -12,13 +12,10 @@
 //   distributed under the License is distributed on an "AS IS" BASIS,
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
-//   limitations under the License. 
+//   limitations under the License.
 #endregion
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace FLS.Tests
 {
@@ -26,7 +23,7 @@ namespace FLS.Tests
 	{
 		public static String GetTestAssemblyDirectory()
 		{
-			String codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+			String codeBase = Assembly.GetExecutingAssembly().Location;
 			UriBuilder uri = new UriBuilder(codeBase);
 			String path = Uri.UnescapeDataString(uri.Path);
 			return System.IO.Path.GetDirectoryName(path);
